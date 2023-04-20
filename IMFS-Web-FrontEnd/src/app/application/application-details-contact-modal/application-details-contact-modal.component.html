@@ -1,0 +1,91 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" [modal]="true" [header]="header" [style]="{width: '25vw'}" [baseZIndex]="10000">
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Select existing contact</label></div>
+        <div class="p-col-8">
+            <p-dropdown [options]="contacts" optionLabel="contactEmail" class="width-300" [(ngModel)]="selectedContact" [showClear]="true" placeholder="Select Contact..."></p-dropdown>
+
+        </div>
+    </div>
+
+    <div class="p-field p-col-12">
+        <p-divider type="dashed">Or Create a new Contact</p-divider>
+    </div>
+
+    <div class="p-field p-grid" *ngIf="guarantorContact">
+        <div class="p-col-4"><label>Type</label></div>
+        <div class="p-col-8">
+            <p-dropdown [options]="contactTypes" class="width-300" [(ngModel)]="selectedContactType" placeholder="Select Type..."></p-dropdown>
+
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Full Name</label></div>
+        <div class="p-col-8">
+            <input id="contactName2" type="text" class="width-300" pInputText [(ngModel)]="currentItem.fullName">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Email</label></div>
+        <div class="p-col-8">
+            <input id="contactEmail" type="text" class="width-300" pInputText [(ngModel)]="currentItem.email">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Residential Address</label></div>
+        <div class="p-col-8">
+            <input id="contactAddress" type="text" class="width-300" pInputText [(ngModel)]="currentItem.residentialAddress">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>DOB</label></div>
+        <div class="p-col-8">
+            <p-calendar name="dob" dateFormat="dd/mm/yy" [showIcon]="true"
+                [(ngModel)]="currentItem.dob" [maxDate]="todayDate">
+            </p-calendar>
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Drivers Lic No.</label></div>
+        <div class="p-col-8">
+            <input id="contactDriversLicNo" type="text" class="width-300" pInputText [(ngModel)]="currentItem.driversLicNo">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Phone</label></div>
+        <div class="p-col-8">
+            <input id="contactPhone" type="text" class="width-300" pInputText [(ngModel)]="currentItem.phone">
+        </div>
+    </div>
+
+
+
+    <div class="p-field p-grid" *ngIf="trusteeContact">
+        <div class="p-col-4"><label>ABN</label></div>
+        <div class="p-col-8">
+            <input id="contactABNACN" type="text" class="width-300" pInputText [(ngModel)]="currentItem.abn">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Signatory</label></div>
+        <div class="p-col-2">
+            <p-radioButton name="IsActive" label="Yes" [(ngModel)]="currentItem.signatory" inputId="opt1" [value]="true" ></p-radioButton>
+        </div>
+        <div class="p-col-2">
+            <p-radioButton name="IsActive" label="No" [(ngModel)]="currentItem.signatory" inputId="opt2" [value]="false"></p-radioButton>
+        </div>
+    </div>
+
+    <p-footer>
+        <button pButton type="button" label="Save" (click)="saveContact()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+</p-dialog>

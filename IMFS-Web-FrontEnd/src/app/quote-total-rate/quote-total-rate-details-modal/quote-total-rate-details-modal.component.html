@@ -1,0 +1,104 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" header="Quote Total Value Details" [style]="{width: '25vw'}" [baseZIndex]="10000">
+    
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>Min ($)</label></div>
+        <div class="p-col-9">
+            <input id="Min" class="background-blueGray" disabled type="text" pInputText [ngModel]="currentItem.min | currency:'USD':'symbol':'.0-0'">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>Max ($)</label></div>        
+        <div class="p-col-9">
+            <input id="Max" class="background-blueGray" disabled type="text" pInputText [ngModel]="currentItem.max | currency:'USD':'symbol':'.0-0'">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>Finance Type</label></div>        
+        <div class="p-col-9">
+            <input id="quoteDurationTypeDescr" class="background-blueGray" disabled type="text" pInputText [ngModel]="currentItem.financeTypeDescr">
+        </div>
+    </div>
+    
+    <div class="p-field p-grid">
+        <div class="p-col-3"></div>        
+        <div class="p-col-3 align-center"><label>Monthly</label></div>
+        <div class="p-col-3 align-center"><label>Quarterly</label></div>        
+        <div class="p-col-3 align-center"><label>Upfront</label></div>        
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>12 months</label></div>        
+        <div class="p-col-3">
+            <input id="months12Monthly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months12Monthly">
+        </div>
+        <div class="p-col-3">
+            <input id="months12Quarterly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months12Quarterly">
+        </div>
+        <div class="p-col-3">
+            <input id="months12Upfront" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months12Upfront">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>24 months</label></div>        
+        <div class="p-col-3">
+            <input id="months24Monthly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months24Monthly">
+        </div>
+        <div class="p-col-3">
+            <input id="months24Quarterly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months24Quarterly">
+        </div>
+        <div class="p-col-3">
+            <input id="months24Upfront" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months24Upfront">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>36 months</label></div>        
+        <div class="p-col-3">
+            <input id="months36Monthly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months36Monthly">
+        </div>
+        <div class="p-col-3">
+            <input id="months36Quarterly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months36Quarterly">
+        </div>
+        <div class="p-col-3">
+            <input id="months36Upfront" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months36Upfront">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>48 months</label></div>        
+        <div class="p-col-3">
+            <input id="months48Monthly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months48Monthly">
+        </div>
+        <div class="p-col-3">
+            <input id="months48Quarterly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months48Quarterly">
+        </div>
+        <div class="p-col-3">
+            <input id="months48Upfront" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months48Upfront">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-3"><label>60 months</label></div>        
+        <div class="p-col-3">
+            <input id="months60Monthly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months60Monthly">
+        </div>
+        <div class="p-col-3">
+            <input id="months60Quarterly" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months60Quarterly">
+        </div>
+        <div class="p-col-3">
+            <input id="months60Upfront" class="align-right" type="text" pInputText [(ngModel)]="currentItem.months60Upfront">
+        </div>
+    </div>
+
+    <p-footer>
+        <p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <button pButton type="button" label="Save" (click)="saveRate()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+    
+
+</p-dialog>

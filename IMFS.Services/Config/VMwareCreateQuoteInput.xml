@@ -1,0 +1,24 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:quot="http://www.vmware.com/it/mw/QuoteDetailsBSM">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <quot:ContractDetails>
+      <quot:ContractList>
+        <quot:Contract>
+          <quot:ContractNumber>{0}</quot:ContractNumber>
+          <quot:ContractModifier/>
+        </quot:Contract>
+      </quot:ContractList>
+      <quot:QuoteNumber/>
+      <quot:QuoteModifier/>
+      <quot:DistributorPRMId>{1}</quot:DistributorPRMId>
+      <quot:ResellerPRMId></quot:ResellerPRMId>
+      <quot:Consolidation>N</quot:Consolidation>
+      <quot:ServiceType>{2}</quot:ServiceType>
+      <!-- Basic/Production/AS-IS -->
+      <quot:Duration>{3}</quot:Duration>
+      <!-- 1,3. Mutually exclusive with coTerminationDate -->
+      <quot:TransactionID>{4}</quot:TransactionID>
+      <quot:coTerminationDate></quot:coTerminationDate>
+    </quot:ContractDetails>
+  </soapenv:Body>
+</soapenv:Envelope>

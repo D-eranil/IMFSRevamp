@@ -1,0 +1,16 @@
+.imfs-panel-header {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    width: 100%;
+    margin: -5px -15px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.imfs-panel-header .panel-title {
+    margin-left: 10px;
+}
+
+.imfs-user-panel{
+    margin: 5px !important;
+}

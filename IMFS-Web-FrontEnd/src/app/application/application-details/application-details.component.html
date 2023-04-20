@@ -1,0 +1,1202 @@
+<p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<div class="application-quote-page">
+  <h5 style="font-size: 24px;">{{header}}</h5>
+  <p-steps [model]="itemsForSteps" [readonly]="false" [(activeIndex)]="activeIndex" styleClass="steps-nav"
+    (activeIndexChange)="navigateApplication($event, 'next')"></p-steps>
+  <div *ngIf="custDetails" class="wrap">
+    <form [formGroup]="applicationCustomerDetailsForm">
+      <div class="card">
+
+        <h5 class="color-ingramMicroBlue h5-fontSize">Customer Details</h5>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="applicationNumber">Application Number</label>
+            <input formControlName="ApplicationNumber" name="applicationNumber" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="status">Status </label>
+            <p-dropdown formControlName="Status" name="status" [options]="applicationStatusOptions"
+              optionLabel="description" optionValue="id" placeholder="Select">
+            </p-dropdown>
+
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="createdDate">Date </label>
+            <p-calendar formControlName="CreatedDate" name="createdDate" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="entityType">Entity Type</label>
+            <div class="p-grid">
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityType" formControlName="EntityType" label="Company"
+                  [(ngModel)]="entityTypeRadio" value="1"></p-radioButton>
+              </div>
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityType" formControlName="EntityType" label="Partnership"
+                  [(ngModel)]="entityTypeRadio" value="2"></p-radioButton>
+              </div>
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityType" formControlName="EntityType" label="Trust"
+                  [(ngModel)]="entityTypeRadio" value="3"></p-radioButton>
+              </div>
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityType" formControlName="EntityType" label="Sole Trader" value="4"
+                  [(ngModel)]="entityTypeRadio"></p-radioButton>
+              </div>
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityType" formControlName="EntityType" label="Other"
+                  [(ngModel)]="entityTypeRadio" value="5"></p-radioButton>
+              </div>
+            </div>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="entityTypeOther">Entity Type Other</label>
+            <input formControlName="EntityTypeOther" name="entityTypeOther" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="entityTrustType">Type of Trust</label>
+            <div class="p-grid">
+              <div class="p-field p-col-4">
+                <p-radioButton name="EntityTrustType" formControlName="EntityTrustType" label="Unit Trust"
+                  [(ngModel)]="entityTrustTypeRadio" value="Unit Trust">
+                </p-radioButton>
+              </div>
+              <div class="p-field p-col-5">
+                <p-radioButton name="EntityTrustType" formControlName="EntityTrustType" label="Discretionary Trust"
+                  [(ngModel)]="entityTrustTypeRadio" value="Discretionary Trust"></p-radioButton>
+              </div>
+              <div class="p-field p-col-3">
+                <p-radioButton name="EntityTrustType" formControlName="EntityTrustType" label="Other" value="Other"
+                  [(ngModel)]="entityTrustTypeRadio">
+                </p-radioButton>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="trustTypeOther">Trust Type Other</label>
+            <input formControlName="EntityTrustOther" name="trustTypeOther" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="nameTrust">Name of Trust </label>
+            <input [disableControl]="true" id="nameTrust" name="nameTrust" formControlName="EntityTrustName" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="abnTrust">Trust ABN</label>
+            <input id="abnTrust" name="abnTrust" formControlName="EntityTrustABN" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="customerName">Customer Name</label>
+            <input id="customerName" name="customerName" formControlName="EndCustomerName" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="abn">ACN/ABN</label>
+            <input id="abn" name="abn" formControlName="EndCustomerABN" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="tradingName">Trading Name</label>
+            <input id="tradingName" name="tradingName" formControlName="EndCustomerTradingAs" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="principleBusinessActivity">Principle Business Activity</label>
+            <input id="principleBusinessActivity" name="principleBusinessActivity" formControlName="BusinessActivity"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="avgAnnualSales">Average Annual Sales</label>
+            <input currencyInput id="avgAnnualSales" name="avgAnnualSales" formControlName="AveAnnualSales" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="yearsInBusiness">Years in Business </label>
+            <input id="yearsInBusiness" name="yearsInBusiness" formControlName="EndCustomerYearsTrading" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="contactName">Contact Name </label>
+            <input id="contactName" name="contactName" formControlName="EndCustomerContactName" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" formControlName="EndCustomerPhone" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="mobile">Mobile </label>
+            <input id="mobile" name="mobile" formControlName="EndCustomerContactPhone" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="email">Email </label>
+            <input id="email" name="email" formControlName="EndCustomerContactEmail" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="fax">Fax</label>
+            <input id="fax" name="fax" formControlName="EndCustomerFax" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h5 class="color-ingramMicroBlue h5-fontSize">Business Address</h5>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-8">
+            <label for="businessAddress">Business Address </label>
+            <div class="p-grid">
+              <div class="p-field p-col-12 p-md-12">
+                <input id="businessAddressLine1" name="businessAddressLine1"
+                  formControlName="EndCustomerPrimaryAddressLine1" type="text" pInputText
+                  [attr.readonly]="controlReadOnly">
+              </div>
+              <div class="p-field p-col-12 p-md-12">
+                <input id="businessAddressLine2" name="businessAddressLine2"
+                  formControlName="EndCustomerPrimaryAddressLine2" type="text" pInputText
+                  [attr.readonly]="controlReadOnly">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="businessAddressCity"> City</label>
+            <input id="businessAddressCity" name="businessAddressCity" formControlName="EndCustomerPrimaryCity"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="businessAddressState">State </label>
+            <input id="businessAddressState" name="businessAddressState" formControlName="EndCustomerPrimaryState"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="businessAddressPostcode"> Postcode</label>
+            <input id="businessAddressPostcode" name="businessAddressPostcode"
+              formControlName="EndCustomerPrimaryPostcode" type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="businessAddressCountry"> Country</label>
+            <input id="businessAddressCountry" name="businessAddressCountry" formControlName="EndCustomerPrimaryCountry"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+      </div>
+      <div class="card">
+        <h5 class="color-ingramMicroBlue h5-fontSize">Postal Address</h5>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-8">
+            <label for="postalAddress">Postal Address </label>
+            <div class="p-grid">
+              <div class="p-field p-col-12 p-md-12">
+                <input id="postalAddressLine1" name="postalAddressLine1" formControlName="EndCustomerPostalAddressLine1"
+                  type="text" pInputText [attr.readonly]="controlReadOnly">
+              </div>
+              <div class="p-field p-col-12 p-md-12">
+                <input id="postalAddressLine2" name="postalAddressLine2" formControlName="EndCustomerPostalAddressLine2"
+                  type="text" pInputText [attr.readonly]="controlReadOnly">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="postalAddressCity"> City</label>
+            <input id="postalAddressCity" name="postalAddressCity" formControlName="EndCustomerPostalCity" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="postalAddressState">State </label>
+            <input id="postalAddressState" name="postalAddressState" formControlName="EndCustomerPostalState"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="postalAddressPostcode"> Postcode</label>
+            <input id="postalAddressPostcode" name="postalAddressPostcode" formControlName="EndCustomerPostalPostcode"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="postalAddressCountry"> Country</label>
+            <input id="postalAddressCountry" name="postalAddressCountry" formControlName="EndCustomerPostalCountry"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+      </div>
+      <div class="card">
+        <h5 class="color-ingramMicroBlue h5-fontSize">Delivery Address</h5>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-8">
+            <label for="deliveryAddress">Postal Address </label>
+            <div class="p-grid">
+              <div class="p-field p-col-12 p-md-12">
+                <input id="deliveryAddressLine1" name="deliveryAddressLine1"
+                  formControlName="EndCustomerDeliveryAddressLine1" type="text" pInputText
+                  [attr.readonly]="controlReadOnly">
+              </div>
+              <div class="p-field p-col-12 p-md-12">
+                <input id="deliveryAddressLine2" name="deliveryAddressLine2"
+                  formControlName="EndCustomerDeliveryAddressLine2" type="text" pInputText
+                  [attr.readonly]="controlReadOnly">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="deliveryAddressCity"> City</label>
+            <input id="deliveryAddressCity" name="deliveryAddressCity" formControlName="EndCustomerDeliveryCity"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="deliveryAddressState">State </label>
+            <input id="deliveryAddressState" name="deliveryAddressState" formControlName="EndCustomerDeliveryState"
+              type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="deliveryAddressPostcode">Postcode </label>
+            <input id="deliveryAddressPostcode" name="deliveryAddressPostcode"
+              formControlName="EndCustomerDeliveryPostcode" type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="deliveryAddressCountry">Country </label>
+            <input id="deliveryAddressCountry" name="deliveryAddressCountry"
+              formControlName="EndCustomerDeliveryCountry" type="text" pInputText [attr.readonly]="controlReadOnly">
+          </div>
+        </div>
+
+      </div>
+      <div class="card">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-12">
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple type="button" label="Next" (click)="navigateApplication('1', 'next')"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple icon="pi pi-save" type="button" label="Save"
+                class="p-button-rounded p-button-success" (click)="saveApplication()"></button>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div *ngIf="financeInfo" class="wrap">
+    <form [formGroup]="financeInformationForm">
+      <div class="card">
+
+        <h5 class="color-ingramMicroBlue h5-fontSize">Finance Information</h5>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="quoteID">Quote Number </label>
+            <input id="quoteID" name="quoteID" formControlName="QuoteID" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+
+          </div>
+
+          <div class="p-field p-col-12 p-md-4">
+            <label for="goodsDescription">Goods Description </label>
+            <input id="goodsDescription" name="goodsDescription" formControlName="GoodsDescription" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="financeTotal">Finance Amount </label>
+            <input currencyInput id="financeTotal" name="financeTotal" formControlName="FinanceTotal" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="quoteTotal">Purchase Price (ex GST) </label>
+            <input currencyInput id="quoteTotal" name="quoteTotal" formControlName="QuoteTotal" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="financeFunderName">Funder </label>
+            <input id="financeFunderName" name="financeFunderName" formControlName="FinanceFunderName" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+
+          </div>
+          <div class="p-field p-col-12 p-md-4 p-grid">
+            <div class="p-col-12">
+              <label for="financeType">Finance Type </label>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceType" value="1" label="Leasing" formControlName="FinanceType">
+              </p-radioButton>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceType" value="2" label="Rental" formControlName="FinanceType">
+              </p-radioButton>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceType" value="4" label="Instalments" formControlName="FinanceType">
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="financeDuration">Term </label>
+            <input id="financeDuration" name="financeDuration" formControlName="FinanceDuration" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="financeValue">Payment Amount (ex GST) </label>
+            <input currencyInput id="financeValue" name="financeValue" formControlName="FinanceValue" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4 p-grid">
+            <div class="p-col-12">
+              <label for="financeFrequency">Payment Frequency </label>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceFrequency" value="Monthly" label="Monthly" formControlName="FinanceFrequency">
+              </p-radioButton>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceFrequency" value="Quarterly" label="Quarterly"
+                formControlName="FinanceFrequency">
+              </p-radioButton>
+            </div>
+            <div class="p-col-4">
+              <p-radioButton name="FinanceFrequency" value="Yearly" label="Yearly" formControlName="FinanceFrequency">
+              </p-radioButton>
+            </div>
+          </div>
+        </div>
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-4">
+            <label for="resellerName">Dealer Name </label>
+            <input id="resellerName" name="resellerName" formControlName="ResellerName" type="text" pInputText
+              [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="resellerContactName">Dealer Rep </label>
+            <input id="resellerContactName" name="resellerContactName" formControlName="ResellerContactName" type="text"
+              pInputText [attr.readonly]="controlReadOnly">
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="resellerId">Dealer ID </label>
+            <input id="resellerId" name="resellerId" formControlName="ResellerId" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="funderQuote">Funder Quote </label>
+            <input readonly id="funderQuote" name="FunderQuote" formControlName="FunderQuote" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="revisedApprovedAmount">Revised Approved Amount </label>
+            <input readonly currencyInput id="revisedApprovedAmount" name="RevisedApprovedAmount" formControlName="RevisedApprovedAmount" type="text"
+              pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="downPaymentAmount">Down Payment Amount </label>
+            <input readonly currencyInput id="DownPaymentAmount" name="DownPaymentAmount" formControlName="DownPaymentAmount" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="paymentWithoutTax">Payment Without Tax </label>
+            <input readonly currencyInput id="paymentWithoutTax" name="PaymentWithoutTax" formControlName="PaymentWithoutTax" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="estimatedTaxAmount">Estimated Tax Amount </label>
+            <input readonly currencyInput id="estimatedTaxAmount" name="EstimatedTaxAmount" formControlName="EstimatedTaxAmount" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="paymentAmount">Payment Amount </label>
+            <input readonly currencyInput id="paymentAmount" name="PaymentAmount" formControlName="PaymentAmount" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="upFrontPayment">Up Front Payment </label>
+            <input readonly currencyInput id="upFrontPayment" name="UpFrontPayment" formControlName="UpFrontPayment" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="bankGuaranteeLetterOfCreditPcr">Bank Guarantee Letter Of Credit Pcr </label>
+            <input readonly id="bankGuaranteeLetterOfCreditPcr" name="BankGuaranteeLetterOfCreditPcr" formControlName="BankGuaranteeLetterOfCreditPcr" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="termUpperLimit">Term Upper Limit </label>
+            <input readonly id="termUpperLimit" name="TermUpperLimit" formControlName="TermUpperLimit" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="leaseStructureNotPermitted">Lease Structure Not Permitted </label>
+            <input readonly id="leaseStructureNotPermitted" name="LeaseStructureNotPermitted" formControlName="LeaseStructureNotPermitted" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="arrearsMonthlyNotPermitted">Arrears Monthly Not Permitted </label>
+            <input readonly id="arrearsMonthlyNotPermitted" name="ArrearsMonthlyNotPermitted" formControlName="ArrearsMonthlyNotPermitted" type="text" pInputText>
+          </div>
+          <div class="p-field p-col-12 p-md-4">
+            <label for="arrearsQuarterlyNotPermitted">Arrears Quarterly Not Permitted </label>
+            <input readonly id="arrearsQuarterlyNotPermitted" name="ArrearsQuarterlyNotPermitted" formControlName="ArrearsQuarterlyNotPermitted" type="text" pInputText>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-12">
+            <div class="p-field p-md-2" style="float: left;">
+              <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left"
+                (click)="navigateApplication('0', 'back')" iconPos="left"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple type="button" label="Next" (click)="navigateApplication('2', 'next')"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple icon="pi pi-save" type="button" label="Save"
+                class="p-button-rounded p-button-success" (click)="saveApplication()"></button>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
+
+  <div *ngIf="signatories" class="wrap">
+    <form [formGroup]="signatoriesForm">
+      <div class="card">
+        <h5 class="color-ingramMicroBlue" style="font-size: larger;">Guarantors</h5>
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-12">
+            <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="guarantorItems.controls">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="align-center color-ingramPartnerCentralBlue">Full Name</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Email</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Residential Address </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">DOB </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Drivers Lic. No. </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Phone </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Type </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Signatory? </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <ng-container formArrayName="guarantorItems">
+                  <tr [formGroupName]="rowIndex">
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="fullName" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'fullName')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="email" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'email')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="residentialAddress" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'residentialAddress')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="dob" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'dob') | date: 'mediumDate'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="driversLicNo" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'driversLicNo')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="phone" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'phone')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="contactType" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'type')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="signatory" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'signatory') ? 'Yes' : 'No'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                      ptooltip="Delete Row" (click)="onDeleteSignatory(rowData.get('contactID').value, getFormData(rowData,'contactType'), rowIndex);"
+                      class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                      ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span class="p-button-icon pi pi-trash"
+                        aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                    </td>
+
+                  </tr>
+                </ng-container>
+
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="2">
+                    <button pButton pRipple type="button" label="Insert New" (click)="openContactModal('Guarantor')"
+                      iconPos="right" class="p-button"></button>
+                  </td>
+                </tr>
+                <tr class="application-tab3-table">
+                  <td colspan="3">
+
+                    <label for="guarantor">Does any Guarantor own property? </label>
+                    <p-dropdown [options]="isGuarantorProperty" name="IsGuarantorProperty"
+                      formControlName="IsGuarantorPropertyOwner" optionLabel="label" optionValue="value"></p-dropdown>
+                    <!---<p-radioButton name="IsGuarantorPropertyOwner" label="Yes"
+                                     formControlName="IsGuarantorPropertyOwner" inputId="opt1" [value]="true">
+                      </p-radioButton>
+
+                      <p-radioButton name="IsGuarantorPropertyOwner" label="No"
+                                     formControlName="IsGuarantorPropertyOwner" inputId="opt2" [value]="false">
+                      </p-radioButton>-->
+                  </td>
+                  <td colspan="2">
+                    <label for="guarantorValue">What is the value? </label>
+                    <input currencyInput id="guarantorValue" name="guarantorValue"
+                      formControlName="GuarantorSecurityValue" type="text" pInputText>
+                  </td>
+                  <td colspan="3">
+                    <label for="guarantorMortgage">Amount owing under mortgage? </label>
+                    <input currencyInput id="guarantorMortgage" name="guarantorMortgage"
+                      formControlName="GuarantorSecurityOwing" type="text" pInputText>
+                  </td>
+                </tr>
+
+              </ng-template>
+            </p-table>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!--Trustee Table-->
+      <div class="card">
+        <h5 class="color-ingramMicroBlue" style="font-size: larger;">Trustees</h5>
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-12">
+            <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="trusteeItems.controls">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="align-center color-ingramPartnerCentralBlue">Full Name</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Email</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Residential Address </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">DOB </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Drivers Lic. No. </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Phone </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">ABN </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Signatory? </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <ng-container formArrayName="trusteeItems">
+                  <tr [formGroupName]="rowIndex">
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="fullName" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'fullName')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="email" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'email')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="residentialAddress" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'residentialAddress')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="dob" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'dob') | date : 'mediumDate'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="driversLicNo" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'driversLicNo')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="phone" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'phone')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="abn" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'abn')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="signatory" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'signatory') ? 'Yes' : 'No'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                      ptooltip="Delete Row" (click)="onDeleteSignatory(rowData.get('contactID').value, getFormData(rowData,'contactType'), rowIndex);"
+                      class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                      ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span class="p-button-icon pi pi-trash"
+                        aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                    </td>
+
+                  </tr>
+                </ng-container>
+
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="2">
+                    <button pButton pRipple type="button" label="Insert New" (click)="openContactModal('Trustee')"
+                      iconPos="right" class="p-button"></button>
+                  </td>
+                </tr>
+
+              </ng-template>
+            </p-table>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--Accountant Table-->
+      <div class="card">
+        <h5 class="color-ingramMicroBlue" style="font-size: larger;">Accountant</h5>
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-12">
+            <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="accountantItems.controls">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="align-center color-ingramPartnerCentralBlue">Full Name</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Email</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Phone </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <ng-container formArrayName="accountantItems">
+                  <tr [formGroupName]="rowIndex">
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="fullName" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'fullName')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="email" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'email')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="phone" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'phone')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-template>
+
+            </p-table>
+          </div>
+
+        </div>
+      </div>
+
+      <!--Beneficial Owners Table-->
+      <div class="card">
+        <h5 class="color-ingramMicroBlue" style="font-size: larger;">Ultimate Beneficial Owners</h5>
+        <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col-12 p-md-12">
+            <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="beneficialOwners.controls">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="align-center color-ingramPartnerCentralBlue">Full Name</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Email</th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Residential Address </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">DOB </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Drivers Lic. No. </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Phone </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Signatory? </th>
+                  <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <ng-container formArrayName="beneficialOwners">
+                  <tr [formGroupName]="rowIndex">
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="fullName" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'fullName')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="email" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'email')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="residentialAddress" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'residentialAddress')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="dob" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'dob') | date : 'mediumDate'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="driversLicNo" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'driversLicNo')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="phone" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'phone')}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input formControlName="signatory" type="text" class="align-center">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{getFormData(rowData,'signatory') ? 'Yes' : 'No'}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                    <td class="align-center">
+                      <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                      ptooltip="Delete Row" (click)="onDeleteSignatory(rowData.get('contactID').value, getFormData(rowData,'contactType'), rowIndex);"
+                      class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                      ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span class="p-button-icon pi pi-trash"
+                        aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                    </td>
+
+                  </tr>
+                </ng-container>
+
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="2">
+                    <button pButton pRipple type="button" label="Insert New"
+                      (click)="openContactModal('BeneficialOwner')" iconPos="right" class="p-button"></button>
+                  </td>
+                </tr>
+
+              </ng-template>
+            </p-table>
+          </div>
+
+        </div>
+      </div>
+      <div class="card">
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col-12 p-md-12">
+            <div class="p-field p-md-2" style="float: left;">
+              <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left"
+                (click)="navigateApplication('1', 'back')" iconPos="left"
+                class="p-button-rounded p-button-success"></button>
+            </div>
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple icon="pi pi-save" type="button" label="Save"
+                class="p-button-rounded p-button-success" (click)="lastStepTab()"></button>
+            </div>
+
+            <!-- <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple icon="pi pi-save" type="button" label="Download"
+                class="p-button-rounded p-button-success" (click)="downloadApplication()"></button>
+            </div> -->
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple type="button" label="Documents"
+                  class="p-button-rounded p-button-success" (click)="documentStepTab()"></button>
+          </div>
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple type="button" label="Send Email"
+                (click)="emailApplication(getApplicationId(), this.applicationNumber)"
+                class="p-button-rounded p-button-success p-button-outlined"></button>
+            </div>
+
+            <!-- <div class="p-field p-md-2" style="float: right;" *ngIf="IMStaffAdminRole">
+              <button pButton pRipple type="button" label="Email Funder"
+                (click)="emailFunder(getApplicationId())"
+                class="p-button-rounded p-button-success p-button-outlined"></button>
+            </div> -->
+
+            <div class="p-field p-md-2" style="float: right;">
+              <button pButton pRipple type="button" label="Email History" (click)="openEmailHistoryModal()"
+                class="p-button-rounded p-button-success p-button-outlined"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="documents" class="wrap">
+    <div class="card">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-6">
+          <h5 class="color-ingramMicroBlue" style="font-size: larger;">Application Number: {{applicationNumber}}</h5>
+        </div>
+        <div class="p-field p-col-12 p-md-2 p-md-offset-4">
+          <div class="align-right" style="margin-top: 20px;"><button (click)="showDocumentUploadDialog()"
+          _ngcontent-iau-c140="" pbutton="" pripple="" type="button" label="Insert New" iconpos="right"
+          class="p-button p-component" ng-reflect-label="Insert New" ng-reflect-icon-pos="right"><span class="p-button-icon p-button-icon-left pi pi-upload"
+            aria-hidden="true"></span><span class="p-button-label">Upload</span></button></div>
+        </div>
+      </div>
+
+      <p-table [style]="{'width':'100%'}" [rows]="10" [value]="filesLists" sortMode="multiple"
+        [globalFilterFields]="['fileName','createdDate','uploadBy']" (refreshAttachmentFilesEmit)="getFiles()">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="align-left color-ingramPartnerCentralBlue" width="45%" pSortableColumn="fileName">
+              Filename <p-sortIcon field="fileName"></p-sortIcon>
+            </th>
+            <th class="align-left color-ingramPartnerCentralBlue" width="22%" pSortableColumn="createdDate">
+              Date Uploaded <p-sortIcon field="createdDate"></p-sortIcon>
+            </th>
+            <th class="align-left color-ingramPartnerCentralBlue" width="22%" pSortableColumn="uploadBy">
+              Uploaded By <p-sortIcon field="uploadBy"></p-sortIcon>
+            </th>
+            <th class="align-center color-ingramPartnerCentralBlue" width="15%">Action</th>
+          </tr>
+          <tr>
+            <th>
+              <p-columnFilter type="text" field="fileName" placeholder="Search FileName" matchMode="contains">
+              </p-columnFilter>
+            </th>
+            <th>
+            </th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-files>
+          <tr>
+            <td>{{files.fileName}}</td>
+            <td>{{files.createdDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{files.uploadBy}}</td>
+            <td class="align-center">
+              <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-download"
+                ptooltip="Edit Product Type" (click)="downloadDocumentFile(files.fileId)"
+                class="p-button-rounded p-button-text p-button p-component p-button-icon-only ng-star-inserted"
+                 ng-reflect-icon="pi pi-download" ng-reflect-text="Edit Product Type"><span
+                  class="p-button-icon pi pi-download" aria-hidden="true"></span><span aria-hidden="true"
+                  class="p-button-label">&amp;nbsp;</span></button>
+              <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                ptooltip="Delete Row" (click)="onDeleteFile(files.fileId);"
+                class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span class="p-button-icon pi pi-trash"
+                  aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">No Documents found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+      <!-- <form [formGroup]="documentForm">
+        <div class="p-field p-col-12 p-md-6" style="display: inline-block;">
+          <label>
+            <h5 style="color: #89adc7; font-size: 11px;
+            ">Lease Agreement Sign or Email:
+            </h5>
+          </label>
+          <input style="width: 50%; float: right;" formControlName="LeaseAgreementSignorEmail" name="LeaseAgreementSignorEmail" type="text" pInputText>
+        </div>
+        <div class="p-field p-col-12 p-md-6" style="display: inline-block;">
+          <label>
+            <h5 style="color: #89adc7; font-size: 11px;">Direct Debit ACH Sign or Email:
+            <input style="width: 50%; float: right;" formControlName="DirectDebitACHSignorEmail" name="DirectDebitACHSignorEmail" type="text" pInputText></h5>
+          </label>
+         </div>
+         <div class="p-field p-col-12 p-md-6" style="display: inline-block;">
+          <label>
+            <h5 style="color: #89adc7; font-size: 11px;">Direct Debit ACH Sign or Email:
+            <input style="width: 50%; float: right;" formControlName="DirectDebitACHSignorEmail" name="DirectDebitACHSignorEmail" type="text" pInputText></h5>
+          </label>
+          </div>
+          <div class="p-field p-col-12 p-md-6" style="display: inline-block;">
+            <label>
+            <h5 style="color: #89adc7; font-size: 11px;">Anti Money Laundering Sign or Email:
+              <input style="width: 50%; float: right;" formControlName="AntiMoneyLaunderingSignorEmail" name="AntiMoneyLaunderingSignorEmail" type="text" pInputText></h5>
+            </label>
+          </div>
+      </form> -->
+
+      <form [formGroup]="documentForm">
+        <h5 class="color-ingramMicroBlue funder-form-title">Funder Document Information</h5>
+        <div class="card">
+        <div class="p-field p-col-12 p-md-6 sign-or-email-top">
+        <label for="LeaseAgreementSignorEmail" class="sign-or-email-top-label sign-or-email-font">Lease Agreement Sign or Email</label>
+        <input type="text" class="sign-or-email-input" id="LeaseAgreementSignorEmail" formControlName="LeaseAgreementSignorEmail" name="LeaseAgreementSignorEmail" pInputText/>
+        </div>
+
+        <div class="p-field p-col-12 p-md-6 sign-or-email-top">
+        <label for="DirectDebitACHSignorEmail" class="sign-or-email-top-label sign-or-email-font">Direct Debit ACH Sign or Email</label>
+        <input type="text" class="sign-or-email-input" id="DirectDebitACHSignorEmail" formControlName="DirectDebitACHSignorEmail" name="DirectDebitACHSignorEmail" pInputText/>
+        </div>
+        <div class="p-field p-col-12 p-md-6 d-in-b">
+          <label for="AntiMoneyLaunderingSignorEmail" class="sign-or-email-bottom sign-or-email-font">Anti Money Laundering Sign or Email</label>
+         <input type="text" class="sign-or-email-input" id="AntiMoneyLaunderingSignorEmail" formControlName="AntiMoneyLaunderingSignorEmail" name="AntiMoneyLaunderingSignorEmail" pInputText/>
+        </div>
+        <div class="p-field p-col-12 p-md-6 d-in-b">
+        <label for="CertificateOfAcceptanceSignorEmail" class="sign-or-email-bottom sign-or-email-font">
+          Certificate Of Acceptance Sign or Email</label>
+         <input type="text" class="sign-or-email-input" id="CertificateOfAcceptanceSignorEmail" formControlName="CertificateOfAcceptanceSignorEmail" name="CertificateOfAcceptanceSignorEmail" pInputText/>
+        </div>
+      </div>
+    </form>
+  </div>
+
+    <div class="p-grid p-fluid p-mt-5">
+      <div class="p-col-2">
+        <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left" iconPos="left"
+          class="p-button-rounded p-button-success" (click)="navigateApplication('2', 'back')"></button>
+      </div>
+      <div class="p-col-2 p-offset-8">
+        <button pButton pRipple type="button" label="Save" icon="pi pi-save" iconPos="right"
+          class="p-button-rounded p-button-success" (click)="lastStepTab()"></button>
+      </div>
+
+    </div>
+    <p-dialog [(visible)]="displayDocumentUploadModal" [responsive]="true" header="Upload Files"
+      [style]="{width: '45vw'}" [baseZIndex]="10000">
+      <app-application-doc-upload-popup #ApplicationDocUploadPopupComponent (onDialogClose)="closeDocumentPopupDialog()"
+        (refreshAttachmentFilesEmit)="getFiles()"></app-application-doc-upload-popup>
+    </p-dialog>
+  </div>
+
+</div>
+<app-application-details-contact-modal #contactModal (refreshEmit)="onContactSelected($event)">
+</app-application-details-contact-modal>
+<app-application-email-history-modal #emailHistoryModal (refreshEmit)="openEmailHistoryModal()">
+</app-application-email-history-modal>

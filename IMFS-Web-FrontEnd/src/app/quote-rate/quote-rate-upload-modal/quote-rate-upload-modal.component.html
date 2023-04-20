@@ -1,0 +1,56 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" header="Quote Rate Upload" [style]="{width: '35vw'}"
+    [baseZIndex]="10000">
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Funder</label></div>
+        <div class="p-col-8">
+            <p-dropdown id="ddFunder" [options]="funders" [(ngModel)]="selectedFunder" [showClear]="true"
+                optionLabel="funderName" optionValue="id" placeholder="Select a Funder"></p-dropdown>
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Product Type</label></div>
+        <div class="p-col-8">
+            <p-dropdown id="ddProductType" [options]="productTypes" [(ngModel)]="selectedProductType" [showClear]="true"
+                optionLabel="description" optionValue="code" placeholder="Select a Finance Product Type"></p-dropdown>
+        </div>
+    </div>
+
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Finance Type</label></div>
+        <div class="p-col-8">
+            <p-dropdown id="ddFinanceType" [options]="financeTypes" [(ngModel)]="selectedFinanceType" [showClear]="true"
+                optionLabel="description" optionValue="quoteDurationType" placeholder="Select a Finance Type">
+            </p-dropdown>
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Upload file</label></div>
+        <div class="p-col-8">
+            <!-- <p-fileUpload #fileUpload mode="advanced" [showUploadButton]="false" [showCancelButton]="false" [customUpload]="true"
+                accept=".csv" (onSelect)="onSelect($event)" chooseLabel="Browse" [auto]="false" class="p-col-8" [multiple]="false">
+                <ng-template pTemplate="content">
+                    <ul *ngIf="filesToUpload.length">
+                        <li *ngFor="let file of filesToUpload">{{file.name}} - {{file.size}} bytes</li>
+                    </ul>
+                </ng-template>
+            </p-fileUpload> -->
+
+            <p-fileUpload #fileUpload mode="advanced" [showUploadButton]="false" [showCancelButton]="false"  [customUpload]="false"
+            (onSelect)="onSelect($event)" [multiple]="false" accept=".csv" chooseLabel="Browse" [auto]="false" class="p-col-8">                
+            </p-fileUpload>
+
+        </div>
+    </div>
+
+    <p-footer>
+        <button pButton type="button" label="Upload" (click)="uploadRates()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+
+
+</p-dialog>

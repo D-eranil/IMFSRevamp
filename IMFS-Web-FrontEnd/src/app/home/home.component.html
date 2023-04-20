@@ -1,0 +1,127 @@
+<main class="flex-shrink-0 page_home">
+
+  <div class="content">
+      <div class="">
+        <div class="">
+          <h2 class="mb-2">Welcome back, <span>{{resellerName}}</span></h2>
+          <p class="mb-5">You last logged in on <span>{{currentDateTime | date:'dd/MM/yyyy HH:mm:ss'}}</span></p>
+          <h3>Recent Quotes</h3>
+          <div class="table-responsive-md">
+            <table class="table table-striped table-hover mb-4">
+              <thead>
+                <tr>
+                  <th scope="col" width="12%"><a href="TOGGLESORT" class="sort">Quote #</a></th>
+                  <!--<th scope="col" style="width:100px;"><a href="TOGGLESORT" class="sort">Name</a></th>-->
+                  <th scope="col" width="24%"><a href="TOGGLESORT" class="sort">Status</a></th>
+                  <th scope="col" width="20%"><a href="TOGGLESORT" class="sort">End Customer</a></th>
+                  <th scope="col" class="totalStyle" width="12%"><a href="TOGGLESORT" class="sort">Total</a></th>
+                  <th scope="col" class="dateStyle" width="12%"><a href="TOGGLESORT" class="sort">Expiry</a></th>
+                  <th scope="col" class="dateStyle" width="10%"><a href="TOGGLESORT" class="sort">Created</a></th>
+                  <th scope="col" class="actionStyle" width="10%"><a href="TOGGLESORT" class="sort">Action</a></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let quote of recentQuotes?.recentQuoteDetails">
+                  <td>{{(quote.quoteNumber !== null) ? quote.quoteNumber : "N/A"}}</td>
+                  <!--<td>{{(quote.quoteName !== null) ? quote.quoteName : "N/A"}}</td>-->
+                  <td>{{(quote.status !== null) ? quote.status : "N/A"}}</td>
+                  <td>{{(quote.endCustomerName !== null) ? quote.endCustomerName : "N/A"}}</td>
+                  <td class="totalStyle">${{quote.quoteTotal | number:'1.2-2'}}</td>
+                  <td class="dateStyle">{{(quote.quoteExpiryDate !== null) ? (quote.quoteExpiryDate | date: 'dd/MM/yyyy') : "N/A"}}</td>
+                  <td class="dateStyle">{{(quote.quoteCreatedDate !== null) ? (quote.quoteCreatedDate | date: 'dd/MM/yyyy') : "N/A"}}</td>
+                  <td class="actionStyle">
+                    <button id="btnEdit" pButton pRipple *ngIf="quote.status === 'New'" type="button" icon="pi pi-pencil" (click)="editQueue(quote)" class="p-button-rounded p-button-text"></button>
+                    <button pButton pRipple *ngIf="quote.status != 'New'" type="button" icon="pi pi-eye" (click)="viewQueue(quote)" class="p-button-rounded p-button-text"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="
+          padding-top: 20px;
+          padding-bottom: 15px;">
+          <h3 style="display: inline; ">Recent Applications</h3>
+          <div style="float: right;">
+            <button  *ngIf="showCheckApplicationButton" pButton pRipple type="button" class="" label="Check Applications" icon="pi"
+            (click)="checkApplications()"></button>
+          </div>
+          </div>
+          <div class="table-responsive-md">
+            <table class="table table-striped table-hover mb-4">
+              <thead>
+                <tr>
+                  <th scope="col" width="12%"><a href="TOGGLESORT" class="sort">Application #</a></th>
+                  <th scope="col" width="24%"><a href="TOGGLESORT" class="sort">Status</a></th>
+                  <th scope="col" width="20%"><a href="TOGGLESORT" class="sort">End Customer</a></th>
+                  <th scope="col" class="totalStyle" width="12%"><a href="TOGGLESORT" class="sort">Amount</a></th>
+                  <th scope="col" class="financeStyle" width="12%"><a href="TOGGLESORT" class="sort">Finance Type</a></th>
+                  <th scope="col" class="dateStyle" width="10%"><a href="TOGGLESORT" class="sort">Created</a></th>
+                  <th scope="col" class="actionStyle" width="10%"><a href="TOGGLESORT" class="sort">Action</a></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let application of recentApplications?.recentAppDetails">
+                  <td>{{application.applicationNumber}}</td>
+                  <td>{{application.status}}</td>
+                  <td>{{application.endUser}}</td>
+                  <td class="totalStyle">${{application.finanaceAmount | number:'1.2-2'}}</td>
+                  <td>{{application.financeType}}</td>
+                  <td class="dateStyle">{{(application.createdDate !== null) ? (application.createdDate | date: 'dd/MM/yyyy') : "N/A"}}</td>
+                  <td class="actionStyle">
+                    <button pButton pRipple *ngIf="application.status === 'Application Cancelled' || application.status === 'Duplicate Application' || application.status === 'Funder Approved' || application.status === 'Ingram Approved' || application.status === 'Application Approved' || application.status === 'Application Rejected' || application.status === 'Contract Issued'" (click)="viewApplication(application)" type="button" icon="pi pi-eye" class="p-button-rounded p-button-success"></button>
+                    <button pButton pRipple *ngIf="application.status === 'Awaiting End Customer Application' || application.status === 'Pending Funder' || application.status === 'Pending Ingram' || application.status === 'Application Submitted' || application.status === 'Application Pending'" (click)="editApplication(application)" type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Awaiting Invoice</h3>
+          <div class="table-responsive-md">
+            <div class="table-responsive-md">
+              <table class="table table-striped table-hover mb-4" width="100%">
+                <thead>
+                  <tr class="ng-star-inserted">
+                    <th scope="col" width="12%"><a href="TOGGLESORT" class="sort">Application #</a></th>
+                    <th scope="col" width="24%"><a href="TOGGLESORT" class="sort">Status</a></th>
+                    <th scope="col" width="20%"><a href="TOGGLESORT" class="sort">End Customer</a></th>
+                    <th scope="col" class="totalStyle" width="12%"><a href="TOGGLESORT" class="sort">Amount</a></th>
+                    <th scope="col" width="12%"><a href="TOGGLESORT" class="sort">Finance Type</a></th>
+                    <th scope="col" class="dateStyle" width="20%"><a href="TOGGLESORT" class="sort">Created</a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let invoice of awaitingInvoices?.recentInvoiceDetails">
+                    <td>{{invoice.applicationNumber}}</td>
+                    <td>{{invoice.status}}</td>
+                    <td>{{invoice.endCustomerName}}</td>
+                    <td class="totalStyle">${{invoice.finanaceAmount | number:'1.2-2'}}</td>
+                    <td>{{invoice.financeType}}</td>
+                    <td class="dateStyle">{{(invoice.createdDate !== null) ? (invoice.createdDate | date: 'dd/MM/yyyy') : "N/A"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!--<div class="col-lg-3">
+        <img src="../../assets/img/J-AU-1449_MicrosoftOEM_Enable-seamless-collaboration-Purple_VBan_FA.jpg" class="d-block mt-4 img-fluid">
+      </div>-->
+    </div>
+    </div>
+
+</main>
+
+<!--<footer class="footer mt-auto py-3 bg-ingramblue">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="../../assets/img/ingram-logo-reverse.svg" alt="" class="d-block pt-2 mb-2" width="120">
+      </div>
+      <div class="col-md-6">
+        <p class="pt-2 mb-0 copyright">&copy; Copyright Ingram Micro 2021</p>
+      </div>
+    </div>
+  </div>
+</footer>-->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>

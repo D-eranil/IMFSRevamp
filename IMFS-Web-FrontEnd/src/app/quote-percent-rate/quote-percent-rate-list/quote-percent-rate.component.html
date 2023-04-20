@@ -1,0 +1,132 @@
+<h1> Quote Percent Value </h1>
+
+<div class="p-fluid p-grid">
+
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFunder" [options]="funders" [(ngModel)]="selectedFunder" [showClear]="true"
+                optionLabel="funderName" optionValue="id" placeholder="Select a Funder"></p-dropdown>
+
+        </span>
+    </div>
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddProductType" [options]="productTypes" [(ngModel)]="selectedProductType" [showClear]="true"
+                optionLabel="description" optionValue="code" placeholder="Select a Product Type"></p-dropdown>
+
+        </span>
+    </div>
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFinanceType" [options]="financeTypes" [(ngModel)]="selectedFinanceType" [showClear]="true"
+                optionLabel="description" optionValue="quoteDurationType" placeholder="Select a Finance Type">
+            </p-dropdown>
+
+        </span>
+    </div>
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFunderPlan" [options]="funderPlans" [(ngModel)]="selectedFunderPlan" [showClear]="true"
+                optionLabel="planDescription" optionValue="planId" placeholder="Select a Funder Plan">
+            </p-dropdown>
+
+        </span>
+    </div>
+
+
+    <div class="p-field p-col-1">
+        <button pButton label="Load Rate" (click)="loadQuotePercentRates()"></button>
+    </div>
+    <div class="p-field p-col-1">
+        <button pButton label="Export" class="p-button-success p-ripple" (click)="exportQuotePercentRates()"></button>
+
+    </div>
+    <div class="p-field p-col-1">
+        <button pButton label="Upload" class="p-button-warning p-ripple" (click)="uploadQuotePercentRates()"></button>
+
+    </div>
+
+
+    <div class="p-field p-col-12">
+
+        <p-table #dt1 [value]="percentRates" [style]="{'width':'100%'}" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="width-100" pSortableColumn="min">Min (%) <p-sortIcon field="min"></p-sortIcon>
+                    </th>
+                    <th class="width-150" pSortableColumn="max">Max (%) <p-sortIcon field="max">
+                        </p-sortIcon>
+                    </th>
+                    <th class="background-1 align-center" colspan="3">12 months</th>
+                    <th class="background-2 align-center" colspan="3">24 months</th>
+                    <th class="background-1 align-center" colspan="3">36 months</th>
+                    <th class="background-2 align-center" colspan="3">48 months</th>
+                    <th class="background-1 align-center" colspan="3">60 months</th>
+                    <th class="background-1 width-75 align-center">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="number" field="min" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="number" field="max" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-2 align-center">Monthly</th>
+                    <th class="background-2 align-center">Quarterly</th>
+                    <th class="background-2 align-center">Upfront</th>
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-2 align-center">Monthly</th>
+                    <th class="background-2 align-center">Quarterly</th>
+                    <th class="background-2 align-center">Upfront</th>
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-1"></th>
+
+            </ng-template>
+            <ng-template pTemplate="body" let-quotePercentRate let-editing="editing">
+                <tr>
+                    <td>{{quotePercentRate.minPercent}}</td>
+                    <td>{{quotePercentRate.maxPercent}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months12Monthly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months12Quarterly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months12Upfront}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months24Monthly}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months24Quarterly}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months24Upfront}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months36Monthly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months36Quarterly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months36Upfront}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months48Monthly}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months48Quarterly}}</td>
+                    <td class="align-right background-2">{{quotePercentRate.months48Upfront}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months60Monthly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months60Quarterly}}</td>
+                    <td class="align-right background-1">{{quotePercentRate.months60Upfront}}</td>
+                    <td class="align-center background-1">
+                        <button pButton pRipple type="button" icon="pi pi-pencil"
+                            (click)="editQuoteBreakPercentRate(quotePercentRate)"
+                            class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <app-quote-percent-rate-details-modal #detailsModal (refreshEmit)="loadQuotePercentRates()"></app-quote-percent-rate-details-modal>
+    <app-quote-percent-rate-upload-modal #uploadModal (refreshEmit)="uploadQuotePercentRates()"></app-quote-percent-rate-upload-modal>

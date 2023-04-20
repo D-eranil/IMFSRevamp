@@ -1,0 +1,11 @@
+{
+    "GetContactDetailsUrl": "http://10.22.178.148:5701/api/Contact/V1/GetContactDetails",
+    "CreateContactUrl": "http://10.22.178.148:5701/api/Contact/V1/CreateContact",
+    "CreateVendorContactUrl": "http://10.22.178.148:5701/api/Contact/V1/CreateVendorContact",
+    "CreateOpportunityUrl": "http://10.22.178.148:5701/api/Opportunity/V1/ExecuteOpportunity",
+    "CreateQuoteProductsUrl": "http://10.22.178.148:5701/api/Quote/V1/CreateQuoteProducts",
+    "CreateQuoteAndProductsUrl": "http://10.22.178.148:5701/api/Quote/V1/CreateQuoteAndProducts",
+    "UpdateQuoteAndProductsUrl": "http://10.22.178.148:5701/api/Quote/V1/UpdateQuoteAndProducts",
+    "GetQuoteAndProductsUrl": "http://10.22.178.148:5701/api/Quote/V1/GetQuoteAndProducts",
+    "GetQuoteByJobNumberUrl": " http://10.22.178.148:5701/api/Quote/V1/GetQuote"
+}

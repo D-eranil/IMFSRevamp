@@ -1,0 +1,44 @@
+<div>
+    <div class="p-field p-fileupload p-grid">
+        <div class="p-col-12 p-md-6">
+            <div class="p-fileupload-buttonbar">
+                <strong>Step 1</strong>
+            </div>
+            <div class="p-fileupload-content text-center">
+                <div class="upload-box">
+                    <input type="file" multiple title="" (change)="getFile($event)">
+                    <span class="pi pi-upload icon" aria-hidden="true"></span>
+                    <h2>Drag and Drop file</h2>
+                </div>
+                <p style="margin-top: 6px; font-size: 18px;"><strong>or</strong></p>
+                <p style="margin-top: 8px;" class="upload-file-input"><input type="file" multiple
+                        (change)="getFile($event)"><button pButton type="button" label="Upload new file"
+                        class="p-button-outlined"></button></p>
+                        <p><b>Allowed formats: xls, xlsx, doc, docx, pdf, csv, jpg, png</b></p>
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+            <div class="p-fileupload-buttonbar">
+                <strong>Step 2</strong>
+            </div>
+            <div class="p-fileupload-content">
+                <div class="files-list" *ngFor="let files of fileAdded;let i = index">
+                    <p class="selected"><span>{{ files.name}}</span>
+                        <br><span class="small">{{ formatBytes(files.size) }}</span>
+                        <i class="pi pi-check"></i>
+                        <i class="pi pi-trash" (click)="onDelete(i)"></i>
+                    </p>
+                </div>
+                <p class="p-text-center" style="margin-top: 16px;"><button pButton
+                        (click)="onFileAttach();closeDocumentPopupDialog();" type="button" label="Attach Files"
+                        class="p-button"></button></p>
+            </div>
+        </div>
+
+    </div>
+    <div class="text-right">
+        <button pButton type="button" label="Close" (click)="closeDocumentPopupDialog()"
+            class="p-button-outlined"></button>
+    </div>
+</div>

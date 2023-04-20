@@ -1,0 +1,153 @@
+<h1>Users </h1>
+
+<p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<div class="p-fluid p-grid">
+    <p-panel class="imfs-user-panel" [toggleable]="true">
+        <ng-template pTemplate="header">
+            <div class="imfs-panel-header" (click)="togglePanel()">
+                <i class="pi pi-search"></i>
+                <span class="panel-title">User Search </span>
+            </div>
+        </ng-template>
+
+        <form>
+            <div class="p-col-12  p-grid p-field ">
+                <label class="p-col-1">
+                    First Name:
+                </label>
+                <div class="p-col-2">
+                    <input pInputText name="FirstName" [(ngModel)]="searchModel.firstName" type="text"
+                        placeholderText="First Name">
+                </div>
+                <label class="p-col-1">
+                    Last Name:
+                </label>
+                <div class="p-col-2">
+                    <input pInputText name="LasttName" [(ngModel)]="searchModel.lastName" type="text"
+                        placeholderText="Last Name">
+                </div>
+
+                <label class="p-col-1">
+                    Email:
+                </label>
+                <div class="p-col-2">
+                    <input pInputText name="email" [(ngModel)]="searchModel.email" type="text" placeholderText="Email">
+                </div>
+
+                <label class="p-col-1">
+                    Customer Number:
+                </label>
+                <div class="p-col-2">
+                    <input pInputText name="CustomerNumber" [(ngModel)]="searchModel.customerNumber" type="text"
+                        placeholderText="Customer Number">
+                </div>
+
+                <label class="p-col-1">
+                    Customer Name:
+                </label>
+                <div class="p-col-2">
+                    <input pInputText name="CustomerName" [(ngModel)]="searchModel.customerName" type="text"
+                        placeholderText="Customer Name">
+                </div>
+            </div>
+
+            <div class="p-d-flex p-jc-center">
+                <div class="p-mr-2">
+                    <p-button type="button" label="Search" (onClick)="userSearch()"></p-button>
+                </div>
+                <div class="p-mr-2">
+                    <p-button type="button" label="Clear All" (onClick)="clearAll()" styleClass="p-button-text">
+                    </p-button>
+                </div>
+            </div>
+        </form>
+    </p-panel>
+
+</div>
+
+
+<div class="p-fluid p-grid">
+
+    <div class="p-field p-col-12">
+
+        <p-table #dt1 [value]="users" [lazy]="true" (onLazyLoad)="loadLazyUsers($event)" [style]="{'width':'100%'}"
+            [rows]="25" [showCurrentPageReport]="true" [totalRecords]="totalRecords" [paginator]="true"
+            [globalFilterFields]="['fullName','email']" [rowsPerPageOptions]="[25,50]" [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="fullName">Full Name <p-sortIcon field="fullName"></p-sortIcon>
+                    </th>
+                    <th style="width: 18rem" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="phoneNumber">Phone <p-sortIcon field="phoneNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="jobTitle">Job title <p-sortIcon field="jobTitle"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="customerNumber">Customer <p-sortIcon field="customerNumber"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="customerName">Customer Name <p-sortIcon field="customerName"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="active">Active <p-sortIcon field="active"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="fullName" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="email" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="phoneNumber" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="jobtitle" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="customerNumber" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="customerName" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="active" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user let-editing="editing">
+                <tr>
+                    <td>{{user.firstName}} {{user.lastName}} </td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phoneNumber}}</td>
+                    <td>{{user.jobTitle}}</td>
+                    <td>{{user.customerNumber}}</td>
+                    <td>{{user.customerName}}</td>
+                    <td class="align-center">{{user.active | yesNo}}</td>
+                    <td class="align-right">
+                        <button *ngIf="getUser(user)" pButton pRipple type="button" icon="pi pi-user-edit"
+                            (click)="editUser(user)" class="p-button-rounded p-button-text"></button>
+
+                        <button *ngIf="getUser(user)" pButton pRipple type="button" icon="pi pi-trash"
+                            (click)="deactivateUser(user)" class="p-button-rounded p-button-text"></button>
+                        <button *ngIf="!getUser(user)" pButton pRipple type="button" icon="pi pi-user-plus"
+                            (click)="activateUser(user)" class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<app-user-details-modal #detailsModal (refreshEmit)="loadUsers()"></app-user-details-modal>

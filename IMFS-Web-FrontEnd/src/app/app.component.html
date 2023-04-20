@@ -1,0 +1,56 @@
+<app-toast></app-toast>
+<app-loading></app-loading>
+
+<p-dialog [closable]="false" [(visible)]="showInactivityAlert">
+  <p-header height="0px">Session timeout</p-header>
+  Due to inactivity, your session will expire in {{timeLeft}} secs
+</p-dialog>
+
+
+<div class="" (click)="onWrapperClick()">
+  <div>
+    <!-- toolbar -->
+    <div class="p-col-12 p-d-flex p-jc-center topbar-row" *ngIf="!isPublicPage">
+      <div class="p-col-12 p-md-10 p-lg-10">
+        <app-imfs-toolbar></app-imfs-toolbar>
+      </div>
+    </div>
+
+    <!-- toolbar to show if public page
+  <div class="p-jc-center" *ngIf="isPublicPage && currentURL !== '/login'">
+    <div class="">
+      <app-login-new></app-login-new>
+    </div>
+  </div>-->
+    <!-- top navigation -->
+    <div class="p-col-12 p-nogutter p-d-flex p-jc-center menu-row" *ngIf="!isPublicPage">
+      <div class="p-col-12 p-md-10 p-lg-10">
+        <app-top-nav></app-top-nav>
+      </div>
+    </div>
+
+    <!-- main content and banner-->
+    <div class="p-jc-center content-div p-col-12" [ngClass]="(!isPublicPage)? 'p-d-flex':'new-login-custom'">
+      <div class="" [ngClass]="(isFullScreen)?'horizontal-padding-20 p-col-12 ':'p-col-12 p-md-8 p-lg-8'">
+        <router-outlet (activate)="changeOfRoutes()"></router-outlet>
+      </div>
+      <!-- <div *ngIf="!isFullScreen && !isPublicPage" class="p-ml-1 p-d-none p-d-md-inline-flex">
+        <app-imfs-banner></app-imfs-banner>
+      </div> -->
+    </div>
+
+    <!-- breadcrumb -->
+    <div class="p-col-12 p-nogutter p-d-flex p-jc-center breadcrumb-row" *ngIf="!isPublicPage">
+      <div class="" [ngClass]="(isFullScreen)?'horizontal-padding-20 p-col-12 ':'p-col-12 p-md-10 p-lg-10 '">
+        <app-imfs-breadcrumb></app-imfs-breadcrumb>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="p-col-12 p-d-flex p-jc-center footer-row remove-padding" *ngIf="!isPublicPage">
+      <div class="p-col-12 p-md-10 p-lg-10 remove-padding">
+        <app-imfs-footer></app-imfs-footer>
+      </div>
+    </div>
+  </div>
+</div>

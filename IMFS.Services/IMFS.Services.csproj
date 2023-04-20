@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;au-test;Production;au-staging</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IMFS.Core\IMFS.Core.csproj" />
+    <ProjectReference Include="..\IMFS.Web.Models\IMFS.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

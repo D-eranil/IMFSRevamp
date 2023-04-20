@@ -1,0 +1,18 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"></soap:Header>
+  <soapenv:Body>
+    <quot:ContractDetails xmlns:quot="http://www.vmware.com/it/mw/QuoteDetailsBSM">
+      <quot:ContractList>
+        <quot:Contract>
+          <quot:ContractNumber>{0}</quot:ContractNumber>
+          <quot:ContractModifier/>
+        </quot:Contract>
+      </quot:ContractList>
+      <quot:DistributorPRMId>{1}</quot:DistributorPRMId>
+      <quot:ResellerPRMId/>
+      <quot:Consolidation>N</quot:Consolidation>
+      <quot:TransactionID>{2}</quot:TransactionID>
+      <quot:coTerminationDate/>
+    </quot:ContractDetails>
+  </soapenv:Body>
+</soapenv:Envelope>

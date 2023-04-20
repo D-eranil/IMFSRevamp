@@ -1,0 +1,67 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" [header]="header" [style]="{width: '35vw'}" [baseZIndex]="10000">
+    
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Vendor Code</label></div>                
+        <div class="p-col-8">
+            <input id="vendorCode" type="text" pInputText [(ngModel)]="currentItem.vendorCode">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Vendor Name</label></div>        
+        <div class="p-col-8">
+            <input id="vendorName" type="text" pInputText [(ngModel)]="currentItem.vendorName">
+        </div>
+    </div>    
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Supplier No.</label></div>        
+        <div class="p-col-8">
+            <input id="supplierNumber" type="text" pInputText [(ngModel)]="currentItem.supplierNumber">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Manufacturer No.</label></div>        
+        <div class="p-col-8">
+            <input id="manufacturerNumber" type="text" pInputText [(ngModel)]="currentItem.manufacturerNumber">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Currency</label></div>        
+        <div class="p-col-8">
+            <input id="currency" type="text" pInputText [(ngModel)]="currentItem.currency">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Country</label></div>        
+        <div class="p-col-8">
+            <input id="companyCode" type="text" pInputText [(ngModel)]="currentItem.companyCode">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>SAP Id</label></div>                
+        <div class="p-col-8">
+            <input id="sapId" type="text" pInputText [(ngModel)]="currentItem.sapId">
+        </div>
+    </div>    
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Active</label></div>
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Active" [(ngModel)]="currentItem.active" inputId="opt1" [value]="true"></p-radioButton>
+        </div>
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Inactive" [(ngModel)]="currentItem.active" inputId="opt2" [value]="false"></p-radioButton>
+        </div>
+    </div>
+
+    <p-footer>
+        <button pButton type="button" label="Save" (click)="saveVendor()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+
+</p-dialog>

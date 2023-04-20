@@ -1,0 +1,123 @@
+<h1> Quote Total Value </h1>
+
+<div class="p-fluid p-grid">
+
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFunder" [options]="funders" [(ngModel)]="selectedFunder" [showClear]="true"
+                optionLabel="funderName" optionValue="id" placeholder="Select a Funder"></p-dropdown>
+
+        </span>
+    </div>
+    
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFinanceType" [options]="financeTypes" [(ngModel)]="selectedFinanceType" [showClear]="true"
+                optionLabel="description" optionValue="quoteDurationType" placeholder="Select a Finance Type">
+            </p-dropdown>
+
+        </span>
+    </div>
+
+    <div class="p-field p-col-2">
+        <span class="p-float-label">
+            <p-dropdown id="ddFunderPlan" [options]="funderPlans" [(ngModel)]="selectedFunderPlan" [showClear]="true"
+                optionLabel="planDescription" optionValue="planId" placeholder="Select a Funder Plan">
+            </p-dropdown>
+
+        </span>
+    </div>
+
+    
+    <div class="p-field p-col-1">
+        <button pButton label="Load Rate" (click)="loadQuoteTotalRates()"></button>
+    </div>
+    <div class="p-field p-col-1">
+        <button pButton label="Export" class="p-button-success p-ripple" (click)="exportQuoteTotalRates()"></button>
+
+    </div>
+    <div class="p-field p-col-1">
+        <button pButton label="Upload" class="p-button-warning p-ripple" (click)="uploadQuoteTotalRates()"></button>
+
+    </div>
+
+
+    <div class="p-field p-col-12">
+
+        <p-table #dt1 [value]="totalRates" [style]="{'width':'100%'}" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="width-100" pSortableColumn="min">Min ($) <p-sortIcon field="min"></p-sortIcon>
+                    </th>
+                    <th class="width-150" pSortableColumn="max">Max ($) <p-sortIcon field="max">
+                        </p-sortIcon>
+                    </th>                    
+                    <th class="background-1 align-center" colspan="3">12 months</th>
+                    <th class="background-2 align-center" colspan="3">24 months</th>
+                    <th class="background-1 align-center" colspan="3">36 months</th>
+                    <th class="background-2 align-center" colspan="3">48 months</th>
+                    <th class="background-1 align-center" colspan="3">60 months</th>
+                    <th class="background-1 width-75 align-center">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="number" field="min" matchMode="contains"
+                            [showMatchModes]="false" [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="number" field="max" matchMode="contains"
+                            [showMatchModes]="false" [showMenu]="false"></p-columnFilter>
+                    </th>
+                   
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-2 align-center">Monthly</th>
+                    <th class="background-2 align-center">Quarterly</th>
+                    <th class="background-2 align-center">Upfront</th>
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-2 align-center">Monthly</th>
+                    <th class="background-2 align-center">Quarterly</th>
+                    <th class="background-2 align-center">Upfront</th>
+                    <th class="background-1 align-center">Monthly</th>
+                    <th class="background-1 align-center">Quarterly</th>
+                    <th class="background-1 align-center">Upfront</th>
+                    <th class="background-1"></th>
+
+            </ng-template>
+            <ng-template pTemplate="body" let-quoteTotalRate let-editing="editing">
+                <tr>
+                    <td>{{quoteTotalRate.min | currency:'USD':'symbol':'.0-0'}}</td>
+                    <td>{{quoteTotalRate.max | currency:'USD':'symbol':'.0-0'}}</td>                    
+                    <td class="align-right background-1">{{quoteTotalRate.months12Monthly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months12Quarterly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months12Upfront}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months24Monthly}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months24Quarterly}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months24Upfront}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months36Monthly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months36Quarterly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months36Upfront}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months48Monthly}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months48Quarterly}}</td>
+                    <td class="align-right background-2">{{quoteTotalRate.months48Upfront}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months60Monthly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months60Quarterly}}</td>
+                    <td class="align-right background-1">{{quoteTotalRate.months60Upfront}}</td>
+                    <td class="align-center background-1">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editQuoteBreakTotalRate(quoteTotalRate)"
+                            class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        
+    </div>
+
+    <app-quote-total-rate-details-modal #detailsModal (refreshEmit)="loadQuoteTotalRates()"></app-quote-total-rate-details-modal>
+    <app-quote-total-rate-upload-modal #uploadModal (refreshEmit)="uploadQuoteTotalRates()"></app-quote-total-rate-upload-modal>

@@ -1,0 +1,14 @@
+<div class="p-grid  p-ai-center" style="height: 45vw;">
+  <div class="container">
+    <div class="p-col align-center" *ngIf="isAuthorize">
+      <h1> Login Successful</h1>
+      <div>You will be redirected to Home page shortly</div>
+    </div>
+    <div class="p-col align-center" *ngIf="!isAuthorize">
+      <h1><i class="pi pi-exclamation-triangle" style="font-size: 3rem; color: red;"></i></h1>
+      <h1> You are not authorized to access IMFS</h1>
+      <div>Please contact IMFS support team <a href="mailto: au-imfsportal@ingrammicro.com">au-imfsportal@ingrammicro.com</a></div>
+      <div><a href="/">Home</a></div>
+    </div>
+  </div>
+</div>

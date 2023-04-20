@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Home NZ",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": false,
+    "itemState": "collapsed",
+    "children": []
+  },
+  {
+    "name": "Quotes NZ",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": true,
+    "itemState": "collapsed",
+    "children": [
+      {
+        "name": "Create Quote",
+        "route": "quote-details",
+        "isExternal": false,
+        "includeResources": "Quote.Details"
+      },
+      {
+        "name": "Search Quote",
+        "route": "/quote-search",
+        "isExternal": false,
+        "includeResources": "Quote.MyQuotes"
+      },
+      {
+        "name": "Quote Dashboard",
+        "route": "/quote-dashboard-new",
+        "isExternal": false,
+        "includeResources": "Quote.Dashboard"
+      }
+    ]
+  },
+  {
+    "name": "Applications",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": true,
+    "itemState": "collapsed",
+    "children": [
+      {
+        "name": "Submit New Application",
+        "route": "new-application",
+        "isExternal": false,
+        "includeResources": ""
+      },
+      {
+        "name": "Search Applications",
+        "route": "/application-search",
+        "isExternal": false,
+        "includeResources": ""
+      },
+      {
+        "name": "Pending Approval",
+        "route": "/application-pending",
+        "isExternal": false,
+        "includeResources": ""
+      },
+      {
+        "name": "Approved Applications",
+        "route": "/application-approved",
+        "isExternal": false,
+        "includeResources": ""
+      }
+    ]
+  },
+  {
+    "name": "Approvals",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": false,
+    "itemState": "collapsed",
+    "children": []
+  },
+  {
+    "name": "Settings",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": false,
+    "itemState": "collapsed",
+    "children": []
+  }
+]

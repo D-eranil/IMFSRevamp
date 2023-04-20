@@ -1,0 +1,1279 @@
+<h5 style="font-size: 24px;">{{header}}</h5>
+<p-confirmDialog [style]="{width: '25vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<p-dialog id="id123" [(visible)]="displayDialog" [responsive]="true" [modal]="true" header="Select Product Type"
+    [style]="{width: '25vw'}" [baseZIndex]="10001">
+
+    <div class="p-field p-grid">
+        <div class="p-col-12"><label>For quoting purposes, please select a Product Type:</label></div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4">
+            <p-radioButton name="ProductType" label="Device" [(ngModel)]="financeProductTypeSelected" inputId="opt1"
+                [value]="1"></p-radioButton>
+        </div>
+        <div class="p-col-4">
+            <p-radioButton name="ProductType" label="Software" [(ngModel)]="financeProductTypeSelected" inputId="opt2"
+                [value]="2"></p-radioButton>
+        </div>
+        <div class="p-col-4">
+            <p-radioButton name="ProductType" label="Service" [(ngModel)]="financeProductTypeSelected" inputId="opt3"
+                [value]="3"></p-radioButton>
+        </div>
+
+    </div>
+    <p-footer>
+        <button pButton type="button" label="Continue" (click)="setProductType(financeProductTypeSelected)"
+            class="p-button-outlined"></button>
+    </p-footer>
+</p-dialog>
+
+<p-steps [model]="itemsForSteps" [readonly]="false" [(activeIndex)]="activeIndex" styleClass="steps-nav"
+    (activeIndexChange)="navigate($event, 'next')"></p-steps>
+
+<div class="wrap">
+
+    <div *ngIf="custDetails">
+        <form [formGroup]="quoteHeaderDetailsForm">
+            <div class="card">
+                <h5 class="color-ingramMicroBlue h5-fontSize">Quote Details</h5>
+
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="quoteName">Quote Number</label>
+                        <div class="p-inputgroup">
+                            <input formControlName="QuoteNumber" name="quoteNumber" type="text" pInputText [readonly]="mode !== 'edit'">
+                            <span class="p-inputgroup-addon">v1</span>
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="quoteName">Expiry Date</label>
+                        <p-calendar formControlName="ExpiryDate" name="expiryDate" dateFormat="dd/mm/yy"
+                            [showIcon]="true" [minDate]="todayDate">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="quoteName">Quote Name</label>
+                        <input id="quoteName" name="quoteName" formControlName="QuoteName" type="text"
+                            [(ngModel)]="quoteName" [ngClass]="{invalid: quoteFormInvalid && quoteName == null }"
+                            pInputText>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="quoteStatus">Quote Status</label>
+                        <p-dropdown formControlName="QuoteStatus" name="quoteStatus" optionLabel="description"
+                            optionValue="id" [options]="quoteStatusOptions" placeholder="Select" [readonly]="mode !== 'edit'">
+                        </p-dropdown>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card">
+              <div>
+
+                <h5 style="display: inline-block" class="color-ingramMicroBlue h5-fontSize">Customer Details</h5>
+                &nbsp;&nbsp;&nbsp;
+                <p style="display: inline-block; font-weight: bold;" class="color-ingramMicroBlue">(Supplier)</p>
+              </div>
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerNumber">Customer</label>
+                        <p-autoComplete formControlName="Customer" id="customerdetail" [suggestions]="filteredCustomers"
+                            (completeMethod)="filterCustomer($event)" (onSelect)="onCustomerNumberSelect($event)"
+                            (onClear)="onCustomerNumberSelect(null)" field="displayLabel" [minLength]="3"
+                            placeholder="Please enter Customer Name" [ngClass]="{invalid: quoteFormInvalid}">
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="abn">ABN</label>
+                        <input formControlName="ABN" id="abn" type="text" pInputText class="disabled-input">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4"></div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerAddressLine1">Address Line 1</label>
+                        <input formControlName="CustomerAddressLine1" id="customerAddressLine1" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerAddressCity">City</label>
+                        <input formControlName="CustomerAddressCity" id="customerAddressCity" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerPostCode">Post Code</label>
+                        <input formControlName="CustomerPostCode" id="cusotmerPostCode" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerAddressLine2">Address Line 2</label>
+                        <input formControlName="CustomerAddressLine2" id="customerAddressLine2" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="address">State</label>
+                        <input formControlName="CustomerAddressState" id="customerAddressState" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="customerCountry">Country</label>
+                        <input formControlName="CustomerCountry" id="customerCountry" type="text" pInputText
+                            class="disabled-input">
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactName">Contact Name</label>
+                        <!-- <input formControlName="CustomerContact" id="customerContact" type="text" pInputText> -->
+                        <p-autoComplete (completeMethod)="filterCustomerContact($event)"
+                            [suggestions]="filteredContacts" formControlName="CustomerContact" id="customerContact"
+                            (onSelect)="onContactNameSelect($event)" (onClear)="onContactNameSelect(null)"
+                            [minLength]="3" [ngClass]="{invalid: quoteFormInvalid}" id="customerContact"
+                            [ngClass]="{invalid: quoteFormInvalid }">
+                            <ng-template let-contact pTemplate="item">
+                                <div class="contact-item">
+                                    <div>{{contact.contactName}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactEmail">Contact Email</label>
+                        <input formControlName="CustomerContactEmail" id="contactEmail" type="text" pInputText
+                            [(ngModel)]="customerContactEmail"
+                            [ngClass]="{invalid: quoteFormInvalid && customerContactEmail == null }"
+                            [pKeyFilter]="invalidEmailCharacters">
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactNumber">Contact Number</label>
+                        <input formControlName="CustomerContactNumber" id="contactNumber" type="text" pInputText
+                            [(ngModel)]="customerContact"
+                            [ngClass]="{invalid: quoteFormInvalid && customerContact == null }">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-md-12">
+                        <p-divider type="solid"></p-divider>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="color-ingramMicroBlue" style="font-size: larger; display: inline-block;">End User Details</h5>
+                &nbsp;&nbsp;&nbsp;
+                <p style="display: inline-block; font-weight: bold;" class="color-ingramMicroBlue">(Borrower/Lessee)</p>
+
+                &nbsp;&nbsp;&nbsp;
+                <div style="display: inline-block;">
+                  <p-checkbox [ngModelOptions]="{standalone: true}" style="display: inline-block; font-weight: bold;" value="1" class="color-ingramMicroBlue" [(ngModel)]="sameAsAboveCheckbox" label="Same as above" (onChange)="sameAsAbove()"></p-checkbox>
+                </div>
+
+
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-4 company-popup">
+                        <label for="endUserName">End User Name</label>
+                        <input id="endUserName" formControlName="EndUserName" type="text" pInputText
+                            [(ngModel)]="endUserName" [ngClass]="{invalid: quoteFormInvalid && endUserName == null }">
+                        <button type="button" (click)="showEndUserDialog()" class="dropdown-btn">
+                            <i class="pi pi-search"></i>
+                        </button>
+                        <p-dialog header="Company Search" [(visible)]="displayEndUserDialog" [style]="{width: '50vw'}"
+                            [contentStyle]="{'overflow':'visible'}" [closable]="false">
+                            <div class="company-popup-template">
+                                <app-au-search-template #SearchPopupModal  [displayEndUserDialog]="displayEndUserDialog" [endUserName]="endUserName"
+                                    (selectSearchCompany)="receivedSearchText($event)" (onDialogClose)="closeDialog()">
+                                </app-au-search-template>
+                            </div>
+                        </p-dialog>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4 company-popup">
+                        <label for="abn">ABN</label>
+                        <input id="endUserABN" formControlName="EndUserABN" type="text" minlength="11" pInputText
+                            [(ngModel)]="endUserABN" [ngClass]="{invalid: quoteFormInvalid && endUserABN == null }">
+                        <button type="button" (click)="showAbnNumberDialog()" class="dropdown-btn">
+                            <i class="pi pi-search"></i>
+                        </button>
+                        <p-dialog header="Company Search" [(visible)]="displayAbnNumberDialog" [style]="{width: '50vw'}"
+                            [contentStyle]="{'overflow':'visible'}" [closable]="false">
+                            <div class="company-popup-template">
+                                <app-au-search-template #SearchPopupModal  [displayAbnNumberDialog]="displayAbnNumberDialog" [endUserABN]="endUserABN"
+                                    (selectSearchAbn)="receivedSearchNumber($event)" (onDialogClose)="closeDialog()"
+                                    [type]="0">
+                                </app-au-search-template>
+                            </div>
+                        </p-dialog>
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="yearsTrading">No of Years Trading</label>
+                        <input id="yearsTrading" formControlName="EndUserYearsTrading" [(ngModel)]="yearsTrading"
+                            [ngClass]="{invalid: quoteFormInvalid && yearsTrading == null }" type="text" pInputText>
+                    </div>
+                    <div class="p-field p-col-4">
+                        <label for="address">Address Line 1</label>
+                        <p-autoComplete formControlName="EndUserAddressLine1" id="EndUserAddressLine1"
+                            [(ngModel)]="selectedAdd" (completeMethod)="newAdd($event)" (onBlur)="fillAddress($event)"
+                            (onSelect)="fillAddress($event)" type="text" [suggestions]="filteredAdd" [minLength]="3"
+                            [ngClass]="{ invalid: addressInvalid && selectedAdd == null}">
+                            <ng-template let-address pTemplate="address">
+                                <div class="address-item">
+                                    <div>
+                                        <p>{{ address.street }},</p>
+                                        <p>{{ address.locality }},</p>
+                                        <p>{{ address.administrative_area }},</p>
+                                        <p>{{ address.postal_code }},</p>
+                                        <p>{{ address.country_iso3 }}</p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                    <div class="p-field p-col-4">
+                        <label for="address">City</label>
+                        <input id="addressCity" formControlName="EndUserCity" [(ngModel)]="city" type="text" pInputText
+                            [ngClass]="{ invalid: addressInvalid && city == null }" />
+                    </div>
+                    <div class="p-field p-col-4">
+                        <label for="address">State</label>
+                        <input id="addressState" formControlName="EndUserState" type="text" [(ngModel)]="state"
+                            pInputText [ngClass]="{ invalid: addressInvalid && state == null }" />
+                    </div>
+
+                    <div class="p-field p-col-4">
+                        <label for="address">Address Line 2</label>
+                        <input id="addressLine2" formControlName="EndUserAddressLine2" type="text"
+                            [(ngModel)]="addLine2" pInputText />
+                    </div>
+                    <div class="p-field p-col-4">
+                        <label for="enduserpostcode">Post Code</label>
+                        <input id="enduserpostcode" formControlName="EndUserPostcode" type="text" [(ngModel)]="postCode"
+                            [ngClass]="{ invalid: addressInvalid && postCode == null }" pInputText />
+                    </div>
+                    <div class="p-field p-col-4">
+                        <label for="endusercountry">Country</label>
+                        <input id="endusercountry" formControlName="EndUserCountry" type="text" [(ngModel)]="country"
+                            [ngClass]="{ invalid: addressInvalid && country == null }" pInputText />
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactName">Contact Name</label>
+                        <input id="endusercontactName" formControlName="EndUserContactName" type="text"
+                            [(ngModel)]="contactName" [ngClass]="{invalid: quoteFormInvalid && contactName == null }"
+                            pInputText />
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactEmail">Contact Email</label>
+                        <input id="endusercontactEmail" formControlName="EndUserContactEmail" type="text"
+                            [(ngModel)]="contactEmail" [ngClass]="{invalid: quoteFormInvalid && contactEmail == null }"
+                            [pKeyFilter]="invalidEmailCharacters" pInputText />
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="contactNumber">Contact Number</label>
+                        <input id="endusercontactNumber" formControlName="EndUserContactNumber" type="text"
+                            [(ngModel)]="contactNumber"
+                            [ngClass]="{invalid: quoteFormInvalid && contactNumber == null }" pInputText />
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="authorised">Authorised Signatory Name</label>
+                        <input formControlName="AuthorisedSignatoryName" id="authorised" type="text"
+                            [(ngModel)]="signatureName"
+                            [ngClass]="{invalid: quoteFormInvalid && signatureName == null }" pInputText />
+                    </div>
+                    <div class="p-field p-col-12 p-md-4">
+                        <label for="authorisedPosition">Authorised Signatory Position</label>
+                        <input formControlName="AuthorisedSignatoryPosition" id="authorisedPosition"
+                            [(ngModel)]="signaturePosition"
+                            [ngClass]="{invalid: quoteFormInvalid && signaturePosition == null }" type="text"
+                            pInputText />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 30px;">
+                <div class="p-fluid p-grid">
+                  <div class="p-col-2 p-offset-8">
+                      <button pButton pRipple type="button" label="Save" icon="pi pi-save" iconPos="right"
+                          [disabled]="!quoteHeaderDetailsForm.valid" class="p-button-rounded p-button-success"
+                          (click)="saveQuote()"></button>
+                  </div>
+                    <div class="p-col-2">
+                        <button pButton pRipple type="button" label="Next" icon="pi pi-arrow-right" iconPos="right"
+                            (click)="onNextFirstStep()" class="p-button-rounded p-button-success"></button>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div *ngIf="quoteItems">
+        <form [formGroup]="quoteItemsForm">
+            <div class="card">
+                <div class="p-fluid p-formgrid p-grid">
+                    <div class="p-col-2 p-field">
+                        <h5>Line Type </h5>
+                        <p-dropdown [options]="lineTypes" (onChange)="resetItem()" name="QuoteType"
+                            formControlName="QuoteType" optionLabel="label" optionValue="value"></p-dropdown>
+                    </div>
+
+                    <div class="p-col-2 p-field">
+                        <h5>Finance Type</h5>
+                        <p-dropdown [options]="financeTypeOptions" name="FinanceType" formControlName="FinanceType"
+                            (onChange)="resetRateOptions(); calculateRate();calculateLines()" optionLabel="label"
+                            optionValue="value">
+                        </p-dropdown>
+
+                    </div>
+
+                    <div class="p-col-2 p-field" *ngIf="IMStaffAdmin">
+                        <h5>Payment Plan</h5>
+                        <p-dropdown [options]="paymentPlanTypes" name="FunderPlan" formControlName="FunderPlan"
+                            (onChange)="resetRateOptions(); calculateRate();calculateLines();changeGstOption();"
+                            optionLabel="label" class="dropdown" optionValue="value"></p-dropdown>
+
+                    </div>
+                    <div class="p-col-4 p-field" *ngIf="IMStaffAdmin">
+                        <h5>Funder</h5>
+                        <p-dropdown [options]="funderTypes" name="Funder" formControlName="Funder" [(ngModel)]="funder"
+                            optionLabel="label" (onChange)="resetRateOptions(); calculateRate(); calculateLines()"
+                            optionValue="value"></p-dropdown>
+
+                    </div>
+                    <div class="p-col-2 p-field" *ngIf="IMStaffAdmin">
+                        <h5>GST</h5>
+                        <p-dropdown [options]="gstTypes" name="GstInclude"
+                            (onChange)="resetRateOptions(); calculateRate(); calculateLines(); changeGstOption();"
+                            formControlName="GstInclude" optionLabel="label" optionValue="value"></p-dropdown>
+
+                    </div>
+
+                    <div class="p-fluid p-col-12 p-md-12">
+                        <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="items.controls"
+                            class="quote-table">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th *ngIf="getQuoteType()==='BySKU'"
+                                        class="align-center color-ingramPartnerCentralBlue">
+                                        VPN</th>
+                                    <th *ngIf="getQuoteType()==='BySKU'"
+                                        class="align-center color-ingramPartnerCentralBlue" width="12%">
+                                        IM SKU</th>
+                                    <th *ngIf="getQuoteType()==='BySKU'"
+                                        class="align-left color-ingramPartnerCentralBlue" width="20%">
+                                        Description</th>
+                                    <th *ngIf="getQuoteType()==='ByCategory'"
+                                        class="align-center color-ingramPartnerCentralBlue">Type </th>
+                                    <th *ngIf="getQuoteType()==='ByCategory'"
+                                        class="align-center color-ingramPartnerCentralBlue">Category </th>
+                                    <th class="align-center color-ingramPartnerCentralBlue">Qty </th>
+                                    <th class="align-left color-ingramPartnerCentralBlue">Cost Price </th>
+                                    <th class="align-left color-ingramPartnerCentralBlue">Margin </th>
+                                    <th class="align-left color-ingramPartnerCentralBlue">Sale Price </th>
+                                    <th class="align-left color-ingramPartnerCentralBlue">Total Ex </th>
+                                    <th class="align-left color-ingramPartnerCentralBlue"
+                                        *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">GST </th>
+
+
+                                    <th class="align-left color-ingramPartnerCentralBlue"
+                                        *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 0"></th>
+
+                                    <th *ngIf="this.quoteItemsForm.get('GstInclude')?.value === null"></th>
+
+
+                                    <th class="align-left color-ingramPartnerCentralBlue">Total</th>
+                                    <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+
+                                </tr>
+
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                                <ng-container formArrayName="items">
+                                    <tr [formGroupName]="rowIndex">
+
+
+
+                                        <td class="align-center" *ngIf="getQuoteType()==='BySKU'" pEditableColumn
+                                            id="sku-column-{{rowIndex}}">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <input formControlName="VPN" pInputText [maxlength]="20" type="text"
+                                                        (blur)="getProductsBySkuOrVpn($event, rowData, rowIndex)" />
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{getFormData(rowData,'VPN')}}
+                                                </ng-template>
+                                            </p-cellEditor>
+
+                                            <p-dialog [(visible)]="skuPopup && rowIndex === activeTabIndex"
+                                                [style]="{width: '67vw'}">
+
+                                                <p-header>
+                                                    Multiple SKUs Available
+                                                </p-header>
+
+                                                <p-table [value]="skuRadioItems">
+                                                    <ng-template pTemplate="header">
+                                    <tr>
+                                        <th *ngIf="getQuoteType()==='BySKU'"
+                                            class="align-center color-ingramPartnerCentralBlue">
+                                            IM SKU</th>
+                                        <th *ngIf="getQuoteType()==='BySKU'"
+                                            class="align-center color-ingramPartnerCentralBlue">
+                                            VPN</th>
+                                        <th *ngIf="getQuoteType()==='BySKU'"
+                                            class="align-center color-ingramPartnerCentralBlue">
+                                            Description</th>
+                                        <th *ngIf="getQuoteType()==='BySKU'"
+                                            class="align-center color-ingramPartnerCentralBlue">
+                                            Action</th>
+
+                                    </tr>
+
+                            </ng-template>
+                            <ng-template pTemplate="body" let-i="rowIndex" let-skuRadiobutton>
+                                <tr>
+                                    <td class="align-center">{{skuRadiobutton.internalSKUID}}</td>
+                                    <td class="align-center">{{skuRadiobutton.vendorSKUID}}</td>
+                                    <td class="align-center">{{skuRadiobutton.productDescription}}</td>
+                                    <td class="align-center">
+                                        <input type="radio" name="options"
+                                            [checked]="skuRadiobutton.internalSKUID === SkUModel.option"
+                                            (click)="selectSku(rowData, i, SkUModel.option)"
+                                            (keyup.enter)="selectSku(rowData, i, SkUModel.option)" />
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <!-- <div  class="p-fluid p-formgrid p-grid sku-popup">
+                                                    <div class="p-field p-col-4" *ngFor="let skuRadiobutton of skuRadioItems; let i = index;">
+                                                    <input
+                                                      type="radio"
+                                                      name="options"
+                                                      [checked]="skuRadiobutton.internalSKUID === SkUModel.option"
+                                                      (click)="selectSku(rowData, i, SkUModel.option)"
+                                                      (keyup.enter)="selectSku(rowData, i, SkUModel.option)"
+
+                                                      />
+                                                      <span>{{ skuRadiobutton.internalSKUID }}</span>
+                                                    </div>
+                                                </div> -->
+                        </p-dialog>
+                        </td>
+
+
+                        <td class="align-center" *ngIf="getQuoteType()==='BySKU'">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input formControlName="IMSKU" pInputText type="text"
+                                        (blur)="getProductDetails(rowData, rowIndex)" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{getFormData(rowData,'IMSKU')}}
+                                </ng-template>
+                            </p-cellEditor>
+
+                        </td>
+
+                        <!-- <h3>{{rowData?.value?.IsNew}}</h3> -->
+                        <td class="align-left" id="description-column-{{rowIndex}}"
+                            *ngIf="getQuoteType()==='BySKU' && (getFinanceProductTypeId(rowData) && rowData?.value?.IsNew) else onlyShowDescr" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input #descr pInputText type="text" formControlName="Description">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{getFormData(rowData,'Description')}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <ng-template #onlyShowDescr>
+                          <td *ngIf="getQuoteType()==='BySKU'" class="align-left" id="description-column-{{rowIndex}}"
+                          >
+                          {{getFormData(rowData,'Description')}}
+                        </td>
+                      </ng-template>
+
+                        <td class="align-center" *ngIf="getQuoteType()==='ByCategory'" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <!--<input formControlName="Item" pInputText type="text" />-->
+                                    <p-dropdown formControlName="Item" [options]="filteredTypes"
+                                        (onClick)="filterType($event)" optionLabel="name" optionValue="value"
+                                        (onChange)="onTypeSelect($event,rowData);" placeholder="Please enter Item">
+                                    </p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{getFormData(rowData,'ItemName')}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td class="align-left" *ngIf="getQuoteType()==='ByCategory'" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <!--<input formControlName="Category" pInputText type="text" />-->
+                                    <!-- <p-autoComplete formControlName="Category" [suggestions]="filteredCategories"
+                                                         (completeMethod)="filterCategory($event)" (onSelect)="onCategorySelect($event)"
+                                                            (onClear)="onCategorySelect(null)" field="name" [minLength]="3"
+                                                              placeholder="Please enter Category"></p-autoComplete> -->
+
+                                    <p-dropdown formControlName="Category" name="Category"
+                                        [options]="filteredCategories" (onChange)="onCategoryChange($event, rowData)"
+                                        optionLabel="name" optionvalue="id" placeholder="Select Category">
+                                    </p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{getFormData(rowData,'CategoryName')}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td class="align-center" pEditableColumn id="qty-column-{{rowIndex}}">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText formControlName="Qty" type="number" class="align-center"
+                                        (focus)="focusQty(rowData, rowIndex)"
+                                        (blur)="calculateLines()">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{getFormData(rowData,'Qty')}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td class="align-left" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input currencyInput pInputText type="text" formControlName="CostPrice"
+                                        class="align-left" (blur)="calculateLines()">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ getFormData(rowData,'CostPrice') | currency }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td class="align-left" pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" formControlName="Margin" class="align-left"
+                                        (blur)="calculateLines()">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <span *ngIf="getFormData(rowData,'Margin')">
+                                        {{ getFormData(rowData,'Margin') | number : '1.2-2' }} %
+                                    </span>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <!-- Might be needed in future if its editable
+                                        <td *ngIf="getFinanceProductTypeId(rowData)"  class="align-right" pEditableColumn>
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <input currencyInput pInputText type="text"
+                                                        formControlName="SalePrice" class="align-right"
+                                                        (blur)="calculateLines()">
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{ getFormData(rowData,'SalePrice') | currency }}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td *ngIf="!getFinanceProductTypeId(rowData)" class="align-right">
+                                            {{ getFormData(rowData,'SalePrice') | currency }}
+                                        </td>
+                                        -->
+
+                        <td class="align-left">
+                            {{ getFormData(rowData,'SalePrice') | currency }}
+                        </td>
+
+                        <td class="align-left">
+                            {{ getFormData(rowData,'LineTotal') | currency }}
+                        </td>
+                        <td class="align-left" *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">
+                            {{ getFormData(rowData,'TotalGST') | currency }}
+                        </td>
+                        <td class="align-left" *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 0"></td>
+
+                        <td *ngIf="this.quoteItemsForm.get('GstInclude')?.value === null"></td>
+                        <td class="align-left">
+                            {{ getFormData(rowData,'TotalInc') | currency }}
+                        </td>
+                        <td class="align-center" id="delete-column-{{rowIndex}}">
+                            <button *ngIf="getFinanceProductTypeId(rowData)" pButton pRipple type="button"
+                                icon="pi pi-pencil" (click)="setFinanceProductId(rowIndex)" pTooltip="Edit Product Type"
+                                class="p-button-rounded p-button-text"></button>
+
+                            <button pButton pRipple type="button" icon="pi pi-trash" (click)="deleteItem(rowIndex)"
+                                pTooltip="Delete Row" class="p-button-rounded p-button-text"></button>
+                        </td>
+                        </tr>
+                        </ng-container>
+                        </ng-template>
+
+                        <ng-template pTemplate="footer">
+                            <tr>
+                                <td colspan="2">
+                                    <button pButton pRipple type="button" label="Insert New" (click)="insertNewItem()"
+                                        iconPos="right" class="p-button"></button>
+                                </td>
+                                <td [attr.colspan]="this.quoteItemsForm.get('GstInclude')?.value === 1 ? 3: 5">
+                                    Margin: <input type="text" class="width-auto align-right" pInputText
+                                        formControlName="ApplyAllMargin" (keyup.enter)="marginApplyAll()" />
+                                    <button pButton pRipple type="button" label="Apply All" (click)="marginApplyAll()"
+                                        class="p-ml-3 width-auto p-button-rounded p-button-success"></button>
+
+                                </td>
+
+                                <td [attr.colspan]="(getQuoteType()==='ByCategory')?((this.quoteItemsForm.get('GstInclude')?.value === 1 ? 5: 3)):(this.quoteItemsForm.get('GstInclude')?.value === 1 ? 6: 4)"
+                                    class="align-right">
+                                    <div class="quote-product-total">
+                                        <div>
+
+                                            Total:{{ getFormData(quoteItemsForm,'QuoteTotal') | currency }}
+                                        </div>
+                                        <div *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">
+                                            Total GST: {{ getFormData(quoteItemsForm,'includeTotalGST') | currency
+                                            }}
+                                        </div>
+                                        <div>
+                                            Grand Total: {{ grandTotal | currency }}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        </p-table>
+
+                    </div>
+
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="duration">Duration</label>
+                    <p-dropdown formControlName="QuoteDuration" name="quoteDuration" [options]="durationOptions"
+                        (onChange)="onDurationChange($event)" placeholder="Select Duration">
+                    </p-dropdown>
+                </div>
+
+                <div *ngIf="isfinanceAvailable; else noFinanceAvailable" class="p-field p-col-12 p-grid p-md-12">
+                    <div class="p-col-12 align-center" *ngIf="calculatingRate">
+                        <div class="loader"></div>
+                    </div>
+                    <div class="p-col-12" *ngIf="!calculatingRate">
+                        <p-splitter [style]="{'height': 'auto'}" styleClass="p-mb-5">
+                            <ng-template pTemplate>
+                                <div class="im-col p-col p-d-flex p-ai-left p-jc-left">
+                                    <div class="im-field p-col-12 p-md-12" style="text-align: left;">
+                                        <label for="">&nbsp;</label>
+
+                                        <label for="">Total:</label>
+
+                                        <label *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'">Total
+                                            Payable:</label>
+
+                                        <label for="">Payment Plan:</label>
+
+                                        <label for="">Funder:</label>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate>
+                                <div class="im-col p-col p-d-flex p-ai-left p-jc-left"
+                                    [class.selected-rate]="selectedRateOption === 'Monthly'">
+                                    <div class="im-field p-col-12 p-md-12" style="text-align: left;">
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Monthly'" for=""
+                                            style="background: #f8f9fa;"><b>Per
+                                                Month <p
+                                                    *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '4'">
+                                                    (inc. GST)</p>
+                                                <p
+                                                    *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '1' || this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'">
+                                                    (ex. GST)</p>
+                                            </b></label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Monthly'"
+                                            for="perMonth"><b>{{getFormData(quoteItemsForm,'MonthlyTotal') |
+                                                currency}}</b>&nbsp;
+                                            <i *ngIf="getFormData(quoteItemsForm,'MonthlyTotal')"
+                                                class="pi pi-info-circle" [escape]="false"
+                                                pTooltip="Id - {{getFormData(quoteItemsForm,'MonthlyId')}}<br />Type - {{getFormData(quoteItemsForm,'MonthlyCalculationType')}}<br />Rate - {{getFormData(quoteItemsForm,'MonthlyRate')}}"></i></label>
+
+
+                                        <label *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'"
+                                            [class.selected-rate-font]="selectedRateOption === 'Monthly'"
+                                            for=""><b>{{getFinanceTotal('MonthlyTotal') | currency}}</b>&nbsp;
+                                        </label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Monthly'"
+                                            for=""><b>{{getFormData(quoteItemsForm,'MonthlyFunderPlanDescription')}}</b>&nbsp;</label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Monthly'"
+                                            *ngIf="!ResellerStandardRole"
+                                            for=""><b>{{getFormData(quoteItemsForm,'MonthlyFunder')}}</b>&nbsp;</label>
+
+                                        <div class="p-button-wrap">
+                                            <button pButton pRipple type="button"
+                                                [disabled]="!getFormData(quoteItemsForm,'MonthlyTotal')"
+                                                [class]="(getFormData(quoteItemsForm,'MonthlyTotal'))? 'p-button-success' : 'p-button-secondary'"
+                                                [label]="(getFormData(quoteItemsForm,'MonthlyTotal'))? 'Select' : 'Select'"
+                                                class="p-button-rounded"
+                                                (click)="rateOptionSelected('Monthly')"></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate>
+                                <div class="im-col p-col p-d-flex p-ai-left p-jc-left"
+                                    [class.selected-rate]="selectedRateOption === 'Quarterly'">
+                                    <div id="divQuarterly" class="im-field p-col-12 p-md-12" style="text-align: left;">
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Quarterly'" for=""
+                                            style="background: #f8f9fa;"><b>Per Quarter
+                                                <p *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '4'">
+                                                    (inc. GST)</p>
+                                                <p
+                                                    *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '1' || this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'">
+                                                    (ex. GST)</p>
+                                            </b></label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Quarterly'"
+                                            for="perQuarter"><b>{{getFormData(quoteItemsForm,'QuarterlyTotal') |
+                                                currency}}</b>&nbsp;
+                                            <i *ngIf="getFormData(quoteItemsForm,'QuarterlyTotal')"
+                                                class="pi pi-info-circle" [escape]="false"
+                                                pTooltip="Id - {{getFormData(quoteItemsForm,'QuarterlyId')}}<br />Type - {{getFormData(quoteItemsForm,'QuarterlyCalculationType')}}<br />Rate - {{getFormData(quoteItemsForm,'QuarterlyRate')}}"></i>
+                                        </label>
+
+                                        <label *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'"
+                                            [class.selected-rate-font]="selectedRateOption === 'Quarterly'"
+                                            for=""><b>{{getFinanceTotal('QuarterlyTotal') | currency}}</b>&nbsp;
+                                        </label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Quarterly'"
+                                            for=""><b>{{getFormData(quoteItemsForm,'QuarterlyFunderPlanDescription')}}</b>&nbsp;</label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Quarterly'"
+                                            *ngIf="!ResellerStandardRole"
+                                            for=""><b>{{getFormData(quoteItemsForm,'QuarterlyFunder')}}</b>&nbsp;</label>
+
+                                        <div class="p-button-wrap">
+                                            <button pButton pRipple type="button"
+                                                [disabled]="!getFormData(quoteItemsForm,'QuarterlyTotal')"
+                                                [class]="(getFormData(quoteItemsForm,'QuarterlyTotal'))? 'p-button-success' : 'p-button-secondary'"
+                                                [label]="(getFormData(quoteItemsForm,'QuarterlyTotal'))? 'Select' : 'Select'"
+                                                class="p-button-rounded"
+                                                (click)="rateOptionSelected('Quarterly')"></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate>
+                                <div class="im-col p-col p-d-flex p-ai-left p-jc-left"
+                                    [class.selected-rate]="selectedRateOption === 'Yearly'">
+                                    <div id="divYearly" class="im-field p-col-12 p-md-12" style="text-align: left;">
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Yearly'" for=""
+                                            style="background: #f8f9fa;"><b>Per Year
+                                                <p *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '4'">
+                                                    (inc. GST)</p>
+                                                <p
+                                                    *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '1' || this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'">
+                                                    (ex. GST)</p>
+                                            </b></label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Yearly'"
+                                            for="perYear"><b>{{getFormData(quoteItemsForm,'YearlyTotal') |
+                                                currency}}</b>&nbsp;</label>
+
+                                        <label *ngIf="this.getFormData(this.quoteItemsForm, 'FinanceType') == '2'"
+                                            [class.selected-rate-font]="selectedRateOption === 'Yearly'"
+                                            for=""><b>{{getFinanceTotal('YearlyTotal') | currency}}</b>&nbsp;
+                                            <i *ngIf="getFormData(quoteItemsForm,'YearlyTotal')"
+                                                class="pi pi-info-circle" [escape]="false"
+                                                pTooltip="Id - {{getFormData(quoteItemsForm,'YearlyId')}}<br />Type - {{getFormData(quoteItemsForm,'YearlyCalculationType')}}<br />Rate - {{getFormData(quoteItemsForm,'YearlyRate')}}"></i>
+                                        </label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Yearly'"
+                                            for=""><b>{{getFormData(quoteItemsForm,'YearlyFunderPlanDescription')}}</b>&nbsp;</label>
+
+                                        <label [class.selected-rate-font]="selectedRateOption === 'Yearly'"
+                                            *ngIf="!ResellerStandardRole"
+                                            for=""><b>{{getFormData(quoteItemsForm,'YearlyFunder')}}</b>&nbsp;</label>
+
+                                        <div class="p-button-wrap">
+                                            <button pButton pRipple type="button"
+                                                [disabled]="!getFormData(quoteItemsForm,'YearlyTotal')"
+                                                [class]="(getFormData(quoteItemsForm,'YearlyTotal'))? 'p-button-success' : 'p-button-secondary'"
+                                                [label]="(getFormData(quoteItemsForm,'YearlyTotal'))? 'Select' : 'Select'"
+                                                class="p-button-rounded"
+                                                (click)="rateOptionSelected('Yearly')"></button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+                        </p-splitter>
+                    </div>
+                </div>
+                <ng-template #noFinanceAvailable>
+                  <div class="no-finance">
+                    <p>
+                      Finance Options are calculated as quote lines are added. <br> There are currently no finance options available for your quote.
+                    </p>
+                  </div>
+                </ng-template>
+
+                <div class="p-grid p-fluid">
+
+                    <div class="p-col-2">
+                        <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left" iconPos="left"
+                            class="p-button-rounded p-button-success" (click)="navigate('', 'back')"></button>
+                    </div>
+
+                    <div class="p-col-2 p-offset-6">
+                        <button pButton pRipple type="button" label="Save" (click)="saveQuote()" icon="pi pi-save"
+                            iconPos="right" [disabled]="!quoteHeaderDetailsForm.valid"
+                            class="p-button-rounded p-button-success"></button>
+                    </div>
+
+                    <div class="p-col-2">
+                        <button pButton pRipple type="button" label="Next" icon="pi pi-arrow-right" iconPos="right"
+                            (click)="goToSummaryTab()" class="p-button-rounded p-button-success"></button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div *ngIf="summary">
+        <div class="card">
+            <h5 class="color-ingramMicroBlue" style="font-size: larger;">Quote Name</h5>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Customer</b></label>
+                    <br>
+                    <label for="">{{getCustomerControlValue().customerName}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>ABN</b></label>
+                    <br>
+                    <label for="">{{getControlValue('ABN')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Customer Address</b></label>
+                    <br>
+                    <label for="">{{getCustomerControlValue().addressLine1}}
+                        <br>{{getCustomerControlValue().addressLine2}} <br> {{getCustomerControlValue().city}}
+                        {{getCustomerControlValue().state}} {{getCustomerControlValue().postCode}} </label>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Name</b></label>
+                    <br>
+                    <label for="">{{getControlValue('CustomerContact')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Email</b></label>
+                    <br>
+                    <label for="">{{getControlValue('CustomerContactEmail')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Number</b></label>
+                    <br>
+                    <label for="">{{getControlValue('CustomerContactNumber')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>End User</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserName')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>ABN</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserABN')}}</label>
+
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Address</b></label>
+                    <br>
+                    <label for="">{{ selectedAdd }} <br />{{ addLine2 }} <br />
+                        {{ city }}, {{ state }} ,{{ postCode }}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Name</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserContactName')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Email</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserContactEmail')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Contact Number</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserContactNumber')}}</label>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Authorised Signatory Name</b></label>
+                    <br>
+                    <label for="">{{getControlValue('AuthorisedSignatoryName')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Authorised Signatory Position</b></label>
+                    <br>
+                    <label for="">{{getControlValue('AuthorisedSignatoryPosition')}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>No of Years Trading</b></label>
+                    <br>
+                    <label for="">{{getControlValue('EndUserYearsTrading')}}</label>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <p-divider type="dashed"></p-divider>
+                </div>
+
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Line Type</b></label>
+                    <br>
+                    <label for="">{{getQuoteType()}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <label for=""><b>Finance Type</b></label>
+                    <br>
+                    <label for="">{{getFinanceType()}}</label>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
+                </div>
+
+                <!-- Summary Table -->
+
+                <div *ngIf="this.quoteDetails.quoteHeader.quoteType" class="p-field p-col-12 p-md-12">
+                    <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="getQuoteItems()">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngIf="getQuoteType()==='BySKU'"
+                                    class="align-center color-ingramPartnerCentralBlue">
+                                    IM SKU</th>
+                                <th *ngIf="getQuoteType()==='BySKU'"
+                                    class="align-center color-ingramPartnerCentralBlue">
+                                    VPN</th>
+                                <th *ngIf="getQuoteType()==='BySKU'"
+                                    class="align-center color-ingramPartnerCentralBlue">
+                                    Description</th>
+                                <th *ngIf="getQuoteType()==='ByCategory'"
+                                    class="align-center color-ingramPartnerCentralBlue">Type </th>
+                                <th *ngIf="getQuoteType()==='ByCategory'"
+                                    class="align-center color-ingramPartnerCentralBlue">Category </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Qty </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Cost Price </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Margin </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Sale Price </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Total Ex </th>
+                                <th class="align-center color-ingramPartnerCentralBlue"
+                                    *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">GST </th>
+                                <th class="align-center color-ingramPartnerCentralBlue">Total</th>
+                            </tr>
+
+                        </ng-template>
+                        <ng-template pTemplate="body" let-quoteLine let-editing="editing">
+                            <tr>
+                                <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.imsku}}</td>
+                                <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.vpn}}</td>
+                                <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.description}}</td>
+                                <td *ngIf="getQuoteType()==='ByCategory'" class="align-center">{{quoteLine.itemName}}
+                                </td>
+                                <td *ngIf="getQuoteType()==='ByCategory'" class="align-center">
+                                    {{quoteLine.categoryName}}</td>
+                                <td class="align-center">{{quoteLine.qty}}</td>
+                                <td class="align-center">{{quoteLine.costPrice | currency}}</td>
+                                <td class="align-center">{{quoteLine.margin}}</td>
+                                <td class="align-center">{{quoteLine.salePrice | currency}}</td>
+                                <td class="align-center">{{quoteLine.lineTotal | currency}}</td>
+                                <td class="align-center" *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">
+                                    {{quoteLine.totalGST | currency}}</td>
+                                <td class="align-center">{{ quoteLine.totalinc | currency }}</td>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <div class="p-field p-col-12 p-offset-9">
+                                <div class="summary-total align-right">
+                                    Total:{{ getFormData(quoteItemsForm,'QuoteTotal') | currency }}
+                                    <div *ngIf="this.quoteItemsForm.get('GstInclude')?.value === 1">
+                                        Total GST: {{ getFormData(quoteItemsForm,'includeTotalGST') | currency }}
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="align-right">
+
+                                Grand Total: {{ grandTotal | currency }}
+
+                            </div>
+
+                        </ng-template>
+                    </p-table>
+                </div>
+                <!-- Summary Table Ends-->
+
+                <div class="p-field p-col-12 p-md-12">
+                    <p-splitter [style]="{'height': '130px'}" styleClass="p-mb-5">
+                        <ng-template pTemplate>
+                            <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                    <label style="color:#B2B4B2;" for="">Duration</label>
+                                    <br>
+                                    <label for=""><b>{{this.quoteItemsForm.controls.QuoteDuration.value}}
+                                            Months</b></label>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate>
+                            <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                    <label style="color:#B2B4B2;" for="">Payment Frequency</label>
+                                    <br>
+                                    <label for=""><b>{{this.quoteItemsForm.controls.Frequency.value}}</b></label>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate>
+                            <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                    <label style="color:#B2B4B2;" for="">Payment Plan</label>
+                                    <br>
+                                    <label
+                                        for=""><b>{{this.quoteItemsForm.controls.FunderPlanDescription.value}}</b></label>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate>
+                            <div class="p-col p-d-flex p-ai-center p-jc-center">
+                                <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                    <label for=""><b>{{this.quoteItemsForm.controls.FinanceValue.value |
+                                            currency}}</b></label>
+                                    <br>
+                                    <label style="color:#B2B4B2;" for="">per frequency</label>
+                                </div>
+                                <span><b></b></span>&nbsp;
+                                <span style="color:#B2B4B2;"></span>&nbsp;
+                            </div>
+                        </ng-template>
+                    </p-splitter>
+                </div>
+
+                <div class="p-col-12 p-md-12">
+                    <div class="p-md-2" style="float: left;">
+                        <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left"
+                            (click)="navigate(2, 'back')" iconPos="left"
+                            class="p-button-rounded p-button-success"></button>
+                    </div>
+
+
+                    <div class="p-md-3 p-lg-2" style="float: left;">
+                        <!-- <button pButton pRipple icon="pi pi-download" type="button"
+                            [disabled]="!quoteHeaderDetailsForm.valid || !getQuoteId()" label="Download" class="p-button-rounded"
+                            (click)="downloadQuote()"></button> -->
+
+                        <p-splitButton class="p-download" label="Download Quote" icon="pi pi-download"
+                            (onClick)="downloadQuote('Excel')" [model]="downloadMenuItems"
+                            [disabled]="!quoteHeaderDetailsForm.valid || !getQuoteId()">
+                        </p-splitButton>
+                    </div>
+                    <div class="p-md-2" style="float: left;">
+                        <button pButton pRipple type="button" label="Documents"
+                            class="p-button-rounded p-button-success" (click)="documentStepTab()"></button>
+                    </div>
+
+
+                    <div class="p-md-2" style="float: left;">
+                      <button pButton pRipple type="button" label="Email History" (click)="openEmailHistoryModal()"
+                      class="p-button-rounded p-button-success p-button-outlined"></button>
+                    </div>
+
+                    <div class="p-md-2" style="float: left;">
+                      <button pButton pRipple type="button" style="background-color: #2196F3; color: white;" label="Request Approval"
+                      [disabled]="!quoteHeaderDetailsForm.valid" (click)="emailQuote(getQuoteNumber())"
+                      class="p-button-rounded p-button-success p-button-outlined"></button>
+                    </div>
+                    <div class="p-md-2" style="float: right;">
+                        <button pButton pRipple icon="pi pi-save" type="button"
+                            [disabled]="!quoteHeaderDetailsForm.valid" label="Save"
+                            class="p-button-rounded p-button-success" (click)="lastStepTab()"></button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="documents">
+        <div class="card">
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <h5 class="color-ingramMicroBlue" style="font-size: larger;">Quote Id: {{quoteIdGlobal}}</h5>
+                </div>
+                <div class="p-field p-col-12 p-md-2 p-md-offset-4">
+                    <div class="align-right" style="margin-top: 20px;"><button (click)="showDocumentUploadDialog()"
+                            _ngcontent-iau-c140="" pbutton="" pripple="" type="button" label="Insert New"
+                            iconpos="right" class="p-button p-component" ng-reflect-label="Insert New"
+                            ng-reflect-icon-pos="right"><span class="p-button-icon p-button-icon-left pi pi-upload"
+                                aria-hidden="true"></span><span class="p-button-label">Upload</span></button></div>
+                </div>
+            </div>
+
+            <p-table [style]="{'width':'100%'}" [rows]="10" [value]="filesLists" sortMode="multiple"
+                [globalFilterFields]="['fileName','createdDate','uploadBy']" (refreshAttachmentFilesEmit)="getFiles()">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="align-left color-ingramPartnerCentralBlue" width="45%" pSortableColumn="fileName">
+                            Filename <p-sortIcon field="fileName"></p-sortIcon>
+                        </th>
+                        <th class="align-left color-ingramPartnerCentralBlue" width="22%" pSortableColumn="createdDate">
+                            Date Uploaded <p-sortIcon field="createdDate"></p-sortIcon>
+                        </th>
+                        <th class="align-left color-ingramPartnerCentralBlue" width="22%" pSortableColumn="uploadBy">
+                            Uploaded By <p-sortIcon field="uploadBy"></p-sortIcon>
+                        </th>
+                        <th class="align-center color-ingramPartnerCentralBlue" width="15%">Action</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p-columnFilter type="text" field="fileName" placeholder="Search FileName"
+                                matchMode="contains"></p-columnFilter>
+                        </th>
+                        <th>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-files>
+                    <tr>
+                        <td>{{files.fileName}}</td>
+                        <td>{{files.createdDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{files.uploadBy}}</td>
+                        <td class="align-center">
+                            <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-download"
+                                pTooltip="Edit Product Type" (click)="downloadDocumentFile(files.fileId)"
+                                class="p-button-rounded p-button-text p-button p-component p-button-icon-only ng-star-inserted"
+                                ng-reflect-icon="pi pi-download" ng-reflect-text="Edit Product Type"><span
+                                    class="p-button-icon pi pi-download" aria-hidden="true"></span><span
+                                    aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                            <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                                pTooltip="Delete Row" (click)="onDeleteFile(files.fileId);"
+                                class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                                ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span
+                                    class="p-button-icon pi pi-trash" aria-hidden="true"></span><span aria-hidden="true"
+                                    class="p-button-label">&amp;nbsp;</span></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="5">No Documents found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-grid p-fluid p-mt-5">
+            <div class="p-col-2">
+                <button pButton pRipple type="button" label="Back" icon="pi pi-arrow-left" iconPos="left"
+                    class="p-button-rounded p-button-success" (click)="navigate(2, 'back')"></button>
+            </div>
+            <div class="p-col-2 p-offset-8">
+                <button pButton pRipple type="button" label="Save" icon="pi pi-save" iconPos="right"
+                    class="p-button-rounded p-button-success"></button>
+            </div>
+
+        </div>
+        <p-dialog [(visible)]="displayDocumentUploadModal" [responsive]="true" header="Upload Files"
+            [style]="{width: '45vw'}" [baseZIndex]="10000">
+            <app-document-upload-popup #DocumentUploadModal (onDialogClose)="closeDocumentPopupDialog()"
+                (refreshAttachmentFilesEmit)="getFiles()">
+            </app-document-upload-popup>
+        </p-dialog>
+    </div>
+</div>
+
+
+<app-quote-email-history-modal #emailHistoryModal (refreshEmit)="openEmailHistoryModal()">
+</app-quote-email-history-modal>

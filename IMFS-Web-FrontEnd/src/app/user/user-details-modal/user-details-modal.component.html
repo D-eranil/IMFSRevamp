@@ -1,0 +1,120 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" [header]="header" [style]="{width: '35vw'}"
+    [baseZIndex]="10000">
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>User Name</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.userName" disabled>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>First Name</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.firstName" disabled>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Last Name</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.lastName" disabled>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Email</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.email" disabled>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Phone</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.phoneNumber">
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Job Title</label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.jobTitle">
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Role </label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.roleName" disabled>
+        </div>
+    </div>
+    
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Finance Duration </label></div>
+        <div class="p-col-8">            
+            <p-dropdown [options]="durationOptions" [(ngModel)]="currentItem.defaultFinanceDurationName"
+              placeholder="Select Finance Duration">
+            </p-dropdown>
+        </div>
+        <!--
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.defaultFinanceDurationName">
+        </div>
+        -->
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Finance Type </label></div>
+        <div class="p-col-8">
+            <p-dropdown [options]="financeTypeOptions" [(ngModel)]="currentItem.defaultFinanceType"
+              placeholder="Select Finance Type">
+            </p-dropdown>
+        </div>
+        <!--
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.defaultFinanceTypeName">
+        </div>
+        -->
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Finance Frequency </label></div>
+        <div class="p-col-8">            
+            <p-dropdown [options]="paymentFrequencyOptions" [(ngModel)]="currentItem.defaultFinanceFrequency"
+              placeholder="Select Payment Frequency">
+            </p-dropdown>
+        </div>
+        <!--
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.defaultFinanceFrequency">
+        </div>
+    -->
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Customer Number </label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.customerNumber" disabled>
+        </div>
+    </div>
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Customer Name </label></div>
+        <div class="p-col-8">
+            <input type="text" pInputText [(ngModel)]="currentItem.customerName" disabled> 
+        </div>
+    </div>
+
+    <!--
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Active</label></div>
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Active" [(ngModel)]="currentItem.active" inputId="opt1"
+                [value]="true"></p-radioButton>
+        </div>
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Inactive" [(ngModel)]="currentItem.active" inputId="opt2"
+                [value]="false"></p-radioButton>
+        </div>
+    </div>
+    -->
+
+    <p-footer>
+        <button pButton type="button" label="Save" (click)="saveUser()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+</p-dialog>

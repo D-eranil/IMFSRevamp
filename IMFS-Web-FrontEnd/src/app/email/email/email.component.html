@@ -1,0 +1,85 @@
+<h5 style="font-size: 24px;">Email</h5>
+
+<form [formGroup]="quoteEmailForm">
+    <div class="card">
+        <div class="p-fluid p-formgrid p-grid">
+
+            <div class="p-col-6">
+                <div class="p-field p-col-12">
+                    <label for="fromEmail">From</label>
+                    <input formControlName="FromEmail" type="text" pInputText>
+                </div>
+
+                <div class="p-field p-col-12">
+                    <label for="toEmail">To</label>
+                    <input formControlName="ToEmail" type="text" pInputText>
+                </div>
+                <div class="p-field p-col-12">
+                    <label for="ccEmail">Cc</label>
+                    <input formControlName="CcEmail" type="text" pInputText>
+                </div>
+
+                <div class="p-field p-col-12">
+                    <label for="subjectEmail">Subject</label>
+                    <input formControlName="SubjectEmail" type="text" pInputText>
+                </div>
+
+
+                <div class="p-col-12">
+                    <p-table #dt1 [value]="emailFiles" [style]="{'width':'100%'}" [rows]="10">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 14rem">Attachment </th>
+                                <th style="width: 6rem; text-align: center;">Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-file>
+                            <tr>
+                                <td> <a href="#" (click)="downloadAttachment(file.id, $event)">{{file.fileName}}</a></td>
+                                <td class="align-center">
+                                    <button pButton pRipple type="button" icon="pi pi-trash" *ngIf="!getEmailId()"
+                                        (click)="removeAttachment(file)" class="p-button-rounded p-button-text"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    * Maximum attachment size 12 MB
+                </div>
+
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field p-col-12">
+                    <p-editor formControlName="BodyEmail" [style]="{'height':'40vh'}">
+
+                    </p-editor>
+                </div>
+
+                <div class="p-col-12">
+                    <div class="p-field p-grid">
+                        <div class="p-col-3">
+                            <button pButton pRipple type="button" label="Attach File" (click)="attachFile()"
+                            *ngIf="!getEmailId()" class="p-button-rounded p-button-success" ></button>
+                        </div>
+
+                        <div class="p-col-3">
+                            <button pButton pRipple type="button" [disabled]="!quoteEmailForm.valid" label="Send"
+                                (click)="sendEmail()"
+                                *ngIf="!getEmailId()" class="p-button-rounded p-button-success"></button>
+                        </div>
+
+                        <div class="p-col-3 p-offset-3">
+                            <button pButton pRipple type="button" label="Cancel" (click)="cancelEmail()"
+                                class="p-button-rounded p-button-success" ></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</form>
+
+<app-email-upload-modal #uploadModal [quoteID]="quoteId" [applicationID]="applicationId" [applicationNumber]="applicationNumber"  (addAttachmentToEmailEmitter)="addAttachmentToEmail($event)" (refreshAttachmentFilesEmit)="getEmailAttachments()"></app-email-upload-modal>

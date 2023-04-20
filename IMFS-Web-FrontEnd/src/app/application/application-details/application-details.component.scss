@@ -1,0 +1,41 @@
+.wrap{
+    background: #ffffff;
+    padding: 1rem;
+    border: 0 none;
+    color: #495057;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.sign-or-email-top {
+  margin-bottom: 10px;
+  display: inline-block;
+  float:left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sign-or-email-top-label {
+  margin-bottom: 0.1rem;
+}
+
+.sign-or-email-bottom {
+  padding-top: 0.3rem;
+}
+
+.sign-or-email-font {
+  color: #89adc7; font-size: 13px;font-weight: bold;
+}
+
+.sign-or-email-input {
+  width: 45%; float: right;
+}
+
+.funder-form-title {
+  font-size: 14px;
+}
+
+.d-in-b {
+  display: inline-block;
+}

@@ -1,0 +1,62 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" header="Email History" [modal]="true" [style]="{width: '55vw'}"
+    [baseZIndex]="10000">    
+
+    <div class="p-fluid p-field p-grid">
+        
+        <div class="p-col-12">
+            <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="emailHistories" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="date">Date<p-sortIcon field="date"></p-sortIcon></th>
+                        <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="time">Time <p-sortIcon field="time"></p-sortIcon></th>
+                        <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="to">To <p-sortIcon field="to"></p-sortIcon></th>
+                        <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="subject">Subject<p-sortIcon field="subject"></p-sortIcon></th>                        
+                        <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                    </tr>
+    
+                </ng-template>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="date" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="time" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="to" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="subject" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                   
+                    <th></th>
+    
+                </tr>
+                <ng-template pTemplate="body" let-emailHistory let-rowIndex="rowIndex">
+                    <tr>
+                        <td class="align-center">{{emailHistory.date}}</td>
+                        <td class="align-center">{{emailHistory.time}}</td>
+                        <td class="align-left">{{emailHistory.to}}</td>
+                        <td [pTooltip]="emailHistory.subject" class="one-line-span" >{{emailHistory.subject}}</td>                        
+    
+                        <td class="align-center">
+                            <button pButton pRipple type="button" icon="pi pi-eye" pTooltip="View Email" (click)="viewEmail(emailHistory.emailId)"
+                                class="p-button-rounded p-button-text"></button>                            
+                                
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+
+    <p-footer>         
+        <button pButton type="button" label="Close" (click)="displayDialog=false" class="p-button-outlined"></button>   
+    </p-footer>
+
+</p-dialog>

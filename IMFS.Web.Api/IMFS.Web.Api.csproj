@@ -1,0 +1,132 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>bc9a315d-0740-49a5-aa59-297cb86b503d</UserSecretsId>
+    <Configurations>Debug;Release;au-test;Production;au-staging</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\_Repositories\IMFS\IMFS.Web.Api\IMFS.Web.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='au-test|AnyCPU'">
+    <DocumentationFile>C:\_Repositories\IMFS\IMFS.Web.Api\IMFS.Web.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='au-staging|AnyCPU'">
+    <DocumentationFile>C:\_Repositories\IMFS\IMFS.Web.Api\IMFS.Web.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Production|AnyCPU'">
+    <DocumentationFile>C:\_Repositories\IMFS\IMFS.Web.Api\IMFS.Web.Api.xml</DocumentationFile>
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\auudaa00\.nuget\packages\nlog.config\4.7.10\contentFiles\any\any\NLog.config" />
+    <None Remove="Resources\Equipment Finance Application.pdf" />
+    <None Remove="Resources\PNAInput.xml" />
+    <None Remove="Resources\WebServiceSettings.xml" />
+    <None Remove="Templates\Emails\images\ingram.jpg" />
+    <None Remove="Templates\Quotes\AU\CategoryTemplate.xlsx" />
+    <None Remove="Templates\Quotes\AU\InstalmentProposal.xlsx" />
+    <None Remove="Templates\Quotes\AU\LeaseOrRentalProposal.xlsx" />
+    <None Remove="Templates\Quotes\AU\LeasingProposal.xlsx" />
+    <None Remove="Templates\Quotes\AU\RentalProposal.xlsx" />
+    <None Remove="Templates\Quotes\AU\SKUTemplate.xlsx" />
+    <None Remove="Templates\Quotes\NZ\CategoryTemplate.xlsx" />
+    <None Remove="Templates\Quotes\NZ\SKUTemplate.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Resources\test-au-imfs-export-2023.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Equipment Finance Application.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PNAInput.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WebServiceSettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Emails\images\ingram.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\CategoryTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\InstalmentProposal.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\LeaseOrRentalProposal.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\LeasingProposal.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\RentalProposal.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\AU\SKUTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\NZ\CategoryTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Templates\Quotes\NZ\SKUTemplate.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="MimeTypes" Version="2.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NLog" Version="4.7.10" />
+    <PackageReference Include="NLog.Schema" Version="4.7.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+    <PackageReference Include="Unity.Microsoft.DependencyInjection" Version="5.11.5" />
+    <PackageReference Include="Unity.WebAPI" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IMFS.BusinessLogic\IMFS.BusinessLogic.csproj" />
+    <ProjectReference Include="..\IMFS.Core\IMFS.Core.csproj" />
+    <ProjectReference Include="..\IMFS.Services\IMFS.Services.csproj" />
+    <ProjectReference Include="..\IMFS.Web.Models\IMFS.Web.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.au-test.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Templates\Emails\NewUserAutoCreate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,80 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" header="Attach Files" [style]="{width: '35vw'}"
+    [baseZIndex]="10000">
+
+    <div class="p-field p-grid">
+
+        <div class="p-col-12">
+
+            <p-fileUpload #fileUpload mode="advanced" [showUploadButton]="false" [showCancelButton]="false"
+                [customUpload]="false" (onSelect)="onSelect($event)" (onRemove)="onRemove($event)" [multiple]="true"
+                accept="" chooseLabel="Browse" [auto]="false" class="p-col-8">
+            </p-fileUpload>
+
+            <p-table *ngIf="filesLists && filesLists.length > 0" [style]="{'width':'100%'}" [rows]="10" [value]="filesLists" sortMode="multiple" [globalFilterFields]="['fileName','createdDate','uploadBy']" [globalFilterFields]="['fileName']">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th class="align-left color-ingramPartnerCentralBlue" width="50%" pSortableColumn="fileName">
+                          Filename
+                          <p-sortIcon field="fileName"></p-sortIcon>
+                        </th>
+                      <th class="align-left color-ingramPartnerCentralBlue" width="22%" pSortableColumn="createdDate">
+                          Date Uploaded
+                         <p-sortIcon field="createdDate"></p-sortIcon>
+                        </th>
+                      <th class="align-left color-ingramPartnerCentralBlue" width="22%"  pSortableColumn="uploadBy">
+                          Uploaded By
+                          <p-sortIcon field="uploadBy"></p-sortIcon>
+                        </th>
+                      <th class="align-center color-ingramPartnerCentralBlue" width="20%" >Action</th>
+                  </tr>
+                  <!-- <tr>
+                      <th>
+                         <p-columnFilter type="text" field="fileName" placeholder="Search FileName" matchMode="contains"></p-columnFilter>
+                      </th>
+                      <th>
+                      </th>
+                      <th></th>
+                      <th></th>
+                  </tr> -->
+              </ng-template>
+              <ng-template pTemplate="body" let-files let-rowIndex="rowIndex">
+                  <tr>
+                      <td>{{files.fileName}}</td>
+                      <td>{{files.createdDate | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{files.uploadBy}}</td>
+                      <td class="align-center">
+                          <!-- <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-download"
+                              ptooltip="Edit Product Type"
+                              class="p-button-rounded p-button-text p-button p-component p-button-icon-only ng-star-inserted"
+                              ng-reflect-icon="pi pi-download" ng-reflect-text="Edit Product Type"><span
+                                  class="p-button-icon pi pi-download" aria-hidden="true"></span><span
+                                  aria-hidden="true" class="p-button-label">&amp;nbsp;</span></button>
+                          <button _ngcontent-wgc-c140="" pbutton="" pripple="" type="button" icon="pi pi-trash"
+                              ptooltip="Delete Row"
+                              class="p-button-rounded p-button-text p-button p-component p-button-icon-only"
+                              ng-reflect-icon="pi pi-trash" ng-reflect-text="Delete Row"><span
+                                  class="p-button-icon pi pi-trash" aria-hidden="true"></span><span aria-hidden="true"
+                                  class="p-button-label">&amp;nbsp;</span></button> -->
+
+                                  <!-- [disabled]="category.key === 'R'" [value]="category" [(ngModel)]="selectedCategories" [inputId]="category.key"  -->
+                          <p-checkbox name="fileSelect" value="category" (click)="addAttachmentToEmail({id:files.fileId, fileName: files.fileName})"
+                          ></p-checkbox>
+
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                      <td colspan="5">No Documents found.</td>
+                  </tr>
+              </ng-template>
+          </p-table>
+
+        </div>
+    </div>
+
+    <p-footer>
+        <button pButton type="button" label="Close" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+</p-dialog>

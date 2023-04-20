@@ -1,0 +1,42 @@
+<!-- this toast is used in imfs-utility.service to display success, info and warn message -->
+<p-toast key="globalToast" position="top-right"></p-toast>
+
+<!-- this toast is used in imfs-utility.service to display error message -->
+<p-toast position="center" key="globalErrorToast" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="margin-bottom-20 text-center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <div [innerHTML]="message.detail"></div>
+        </div>
+        <div class="p-grid">
+            <div class="p-col-12 text-center">
+                <button type="button" pButton (click)="close()" label="Close" class="p-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-dialog [header]="dialogTitle" [(visible)]="dialogDisplay" [modal]="true" [responsive]="true"
+    [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000">
+    <div [innerHTML]="dialogContentHTML"></div>
+    <p-footer>
+        <div class="p-grid">
+            <div class="p-col-12" style="text-align: center">
+                <button type="button" pButton (click)="dialogDisplay=false" label="Close"
+                    class="p-button-secondary"></button>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-confirmDialog #globalConfirm key="globalConfirm" [header]="confirmTitle" [style]="{width: '50vw', minWidth: '30vw'}">
+    <p-footer>
+        <div class="p-grid p-col-12">
+
+            <button type="button" pButton [label]="globalConfirm.acceptLabel" (click)="globalConfirm.accept()"></button>
+            <button type="button" pButton class="p-button-secondary" [label]="globalConfirm.rejectLabel"
+                (click)="globalConfirm.reject()"></button>
+        </div>
+    </p-footer>
+</p-confirmDialog>

@@ -1,0 +1,337 @@
+/* -- COLOUR VARIABLES AND HELPER CLASSES -- */
+::ng-deep {
+  :root {
+    --ingramblue: #0076CE;
+    --secondaryblue: #0E93FF;
+    --mutedblue: #9FD1FF;
+    --white: #ffffff;
+    --black: #000000;
+    --bggrey: #f8f8f8;
+    --lightgrey: #e5e6e8;
+    --mediumgrey: #555555;
+    --darkgrey: #3E4247;
+    --integrityblue2: #4FBCF0;
+    --integrityblue3: #11A2ED;
+    --greyblue1: #A4B0BC;
+    --greyblue2: #b1bcc8;
+    --lightblue: #E1E9EF;
+    --rowblue: #F8FBFF;
+  }
+
+  nav.primary-navigation ul {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .menu-row {
+    padding-bottom: 0;
+  }
+
+  .logoutBtn {
+    cursor: pointer;
+  }
+
+  .actionStyle {
+    text-align: center;
+  }
+
+  .totalStyle {
+    text-align: left;
+  }
+
+  .financeStyle {
+    
+  }
+
+  .dateStyle {
+    text-align: left;
+  }
+
+  .helpButton {
+    cursor: pointer;
+  }
+
+  .page_home .text-ingramblue {
+    color: var(--ingramblue);
+  }
+
+  .page_home .text-integrityblue3 {
+    color: var(--integrityblue3);
+  }
+
+  .page_home .text-mutedblue {
+    color: var(--mutedblue);
+  }
+
+  .page_home .reverse {
+    color: var(--white);
+  }
+
+  .bg-lightgrey {
+    background-color: var(--bggrey);
+  }
+
+  .page_home .bg-ingramblue {
+    background-color: var(--ingramblue);
+  }
+
+  .page_home .bg-secondaryblue {
+    background-color: var(--secondaryblue);
+  }
+
+  .page_home .bg-lightblue {
+    background-color: var(--lightblue);
+  }
+
+
+
+  .page_home {
+    background-color: #e1e9ef;
+    min-height: 100vh;
+    color: #000000;
+    padding: 0 30px 0 0;
+  }
+
+  .remove-padding {
+    padding: 0;
+  }
+
+  .page_home table {
+    width: 100%;
+    text-align: left;
+  }
+
+
+
+  .page_home h1 {
+    color: var(--mutedblue);
+    font-size: 60px;
+  }
+
+
+  .page_home h2 {
+    font-size: 24px;
+    color: var(--black);
+    font-weight: bold;
+    margin: 2em 0em 0.5em 0em;
+  }
+
+  .page_home h3 {
+    color: var(--ingramblue);
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2em 0em 1em 0em;
+  }
+
+  .page_home h5, .page_home h6 {
+    color: var(--mutedblue);
+  }
+
+  .page_home h5:after {
+    content: '';
+    height: 1px;
+    width: 30px;
+    display: block;
+    position: relative;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+    margin-left: -15px;
+    left: 50%;
+    background-color: var(--mutedblue);
+  }
+
+  .page_home a {
+    text-decoration: none;
+  }
+
+  .page_home a:hover {
+    color: var(--integrityblue3);
+  }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif !important;
+    font-weight: normal !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility !important;
+    height: 100%;
+    color: var(--mediumgrey);
+    background-color: var(--lightblue) !important;
+    margin: 0 auto;
+}
+
+  /* -- TABLES -- */
+  .page_home table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+
+  .page_home .table > :not(caption) > * > * {
+    padding: 10px 15px;
+    font-size: 0.85em;
+    background-color: var(--white);
+  }
+
+  .page_home .table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    /* --bs-table-striped-color: #212529; */
+    /* --bs-table-striped-bg: rgba(0, 0, 0, 0.05); */
+    /* --bs-table-active-color: #212529; */
+    /* --bs-table-active-bg: rgba(0, 0, 0, 0.1); */
+    /* --bs-table-hover-color: #212529; */
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+  }
+
+  .page_home .table > thead {
+    vertical-align: bottom;
+  }
+
+  .table > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+  }
+
+  .page_home .table-striped > tbody > tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #F8FBFF;
+  }
+
+  .page_home .table-hover > tbody > tr:hover button {
+    --bs-table-accent-bg: var(--secondaryblue);
+    color: #FFF
+  }
+
+  .page_home .table-hover > tbody > tr .p-button.p-button-text:enabled:hover {
+    color: #FFF
+  }
+
+  .page_home .table-hover > tbody > tr:hover {
+    --bs-table-accent-bg: var(--secondaryblue);
+    color: #FFF
+  }
+
+  .page_home .table > :not(caption) > * > th {
+    background-color: #EBF3FA;
+  }
+
+
+
+  .page_home th a.sort {
+    color: var(--black);
+  }
+
+
+  .page_home .p-formgrid .p-field {
+    padding-top: 0 !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .page_home .p-tabview-panel .card {
+    border: none;
+  }
+
+  .page_home .p-fluid .p-calendar {
+    display: flex;
+    height: 44px;
+  }
+
+  .page_home .p-jc-end {
+    justify-content: flex-end;
+    align-items: end;
+    display: inline-flex;
+  }
+
+  .page_home .p-fluid .p-splitbutton {
+    height: 40px;
+  }
+
+  .page_home .p-datatable-footer {
+    text-align: right;
+  }
+
+  .page_home .p-datatable-footer .p-offset-11 {
+    margin-left: 0;
+  }
+
+  .page_home .p-button-label {
+    text-align: right !important;
+  }
+
+  .page_home {
+    font-size: 16px;
+   }
+
+  /* -- RESPONSIVE -- */
+  /*If device is greater than or equal to 768px, then do*/
+  @media only screen and (min-width: 768px) {
+    .page_home h1, .page_home h2, .page_home h3, .page_home h4, .page_home h5, .page_home h6, .page_home p, .page_home i {
+      text-align: left;
+    }
+
+    .page_home p.copyright {
+      text-align: right;
+    }
+
+    footer img {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .page_home h5:after {
+      margin-left: 0;
+      left: 0;
+    }
+  }
+  /*If device is greater than or equal to 976px, then do*/
+  @media only screen and (min-width: 976px) {
+    .nav-item {
+      margin-right: 1.5em;
+      font-weight: bold;
+      padding: 0;
+      border-bottom: none;
+    }
+
+    .dropdown-menu[data-bs-popper] {
+      margin-top: 1.5em;
+    }
+
+    .dropdown-item {
+      padding: 0.75em;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--secondaryblue);
+      color: var(--white);
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .login-m {
+      display: block;
+    }
+  }
+
+  .home_page h3 {
+    color: var(--ingramblue);
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2em 0em 1em 0em;
+  }
+}
+
+
+

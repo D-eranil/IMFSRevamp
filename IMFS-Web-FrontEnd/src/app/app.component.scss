@@ -1,0 +1,62 @@
+body {
+  margin:0 auto;
+}
+
+.fullWidth {
+    padding-left: 0;
+}
+
+.topbar-row {
+    background-color: #000000;
+    color : #B2B4B2;
+    height: 68px;
+}
+
+.menu-row {
+  background: #ffffff;
+  color: #000000;
+  padding-bottom: 0;
+}
+
+.footer-row {
+    /*height: 65px;*/
+    background-color: #0072CE;
+    color:#fff;
+}
+.content-div{
+    min-height: 85vh;
+}
+.topbar-row {
+  background-color: #000000;
+  color: #B2B4B2;
+  height: 68px;
+}
+body#page_login {
+  font-size: 16px !important;
+  font-family: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif !important;
+  font-weight: normal !important;
+  line-height: 1.5em !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility !important;
+  height: 100%;
+  background-color: transparent !important;
+}
+.remove-padding{
+    padding:0;
+}
+.new-login-custom.content-div .p-col-12.p-md-8.p-lg-8 {
+  width: auto;
+  padding: 0;
+}
+.p-jc-center.content-div.p-col-12.new-login-custom {
+  padding: 0;
+  overflow-x: hidden;
+}
+.p-dialog .p-dialog-header {
+  padding: 0rem;
+}

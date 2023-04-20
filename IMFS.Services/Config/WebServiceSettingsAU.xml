@@ -1,0 +1,21 @@
+﻿<WebServiceSettings>
+  <WebServiceSetting>
+    <Name>PriceAndAvailabilityAU</Name>
+    <Url>https://imservices-usch01.corporate.ingrammicro.com:9043/PriceAndAvailability_v2_6_vs0</Url>
+    <Action>/product/PriceAndAvailability</Action>
+    <UserName>APPQUOTEAU</UserName>
+    <Password>4RT!08vQ77</Password>
+    <UserCredentialID>{68f116a4-2539-4f58-a107-9370a3e2e387}</UserCredentialID>
+    <PNAInputTemplateName>PNAInput.xml</PNAInputTemplateName>
+  </WebServiceSetting>
+
+  <WebServiceSetting>
+    <Name>POCreateAU</Name>
+    <Url>https://imservices-test1-usch01.corporate.ingrammicro.com:9043/PurchaseOrderCreate_v2_0_vs0</Url>
+    <Action>/product/PriceAndAvailability</Action>
+    <UserName>APPQUOTEAU</UserName>
+    <Password>4RT!08vQ77</Password>
+    <UserCredentialID>{68f116a4-2539-4f58-a107-9370a3e2e387}</UserCredentialID>
+    <PNAInputTemplateName>POCreateInput.xml</PNAInputTemplateName>
+  </WebServiceSetting>
+</WebServiceSettings>

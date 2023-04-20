@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    <h5>
+        This page is required for silent token refresh(Auto Login).
+    </h5>
+    <p>
+        This file is loaded into the hidden iframe after getting new tokens. Its only task is to send the received
+        tokens to the main application:
+    </p>
+    <p>
+        For details please visit <a
+            href="https://manfredsteyer.github.io/angular-oauth2-oidc/docs/additional-documentation/refreshing-a-token-(silent-refresh).html">this
+            page</a>
+    </p>
+    <script>
+        parent.postMessage(location.hash, location.origin);
+    </script>
+</body>
+
+</html>

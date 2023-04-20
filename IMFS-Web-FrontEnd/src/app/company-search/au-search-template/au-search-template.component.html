@@ -1,0 +1,50 @@
+
+<div class="company-search-popup">
+    <div class="card">
+        <div class="company-search-radio">
+        <label>
+            <p-radioButton name="type" [(ngModel)]="type" type="radio" value="1" id="companyradio"></p-radioButton>
+           <span>Company Name</span>
+        </label>
+        <label>
+            <p-radioButton name="type" [(ngModel)]="type" type="radio" value="0" id="abnradio"></p-radioButton>
+            <span>ABN Number</span>
+        </label>
+        </div>
+        <form [formGroup]="searchPopupform" (ngSubmit)="onSubmit()">
+        <div class="company-search-input">
+        <div class="text-center" *ngIf="type == 1">
+            <p-autoComplete [autofocus]="true" [delay]="1000" [completeOnFocus]="true" [(ngModel)]="selectedCompanyName" [suggestions]="filteredCompanyName" (completeMethod)="filterCompany($event)"
+             [minLength]="3" formControlName="searchcompanyname" placeholder="Enter Company Name..." field="name">
+            <ng-template let-company pTemplate="company">
+                <div class="company-item">
+                <div><b>{{company.name}}</b>,<div class="text-space"><b>Postcode:</b> {{company.postcode}},</div> <b>ABN:</b> {{company.abn}}</div>
+                </div>
+            </ng-template>
+        </p-autoComplete>
+       <div *ngIf="f.searchcompanyname.touched && f.searchcompanyname.errors" class="invalid-feedback">
+            <div *ngIf="f.searchcompanyname.errors.required">Company Name is required</div>
+        </div>
+        <div class="company-search-btn" >
+            <button pButton pRipple type="submit" label="Apply" [disabled]= "!selectedCompanyName" iconPos="right" (click)="onAddSelectCompany()" ></button>
+            <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="closeDialog()"></button>
+        </div>
+        </div>
+        <div class="text-center" *ngIf="type == 0">
+            <p-autoComplete [autofocus]="true" [delay]="1000" [completeOnFocus]="true" [(ngModel)]="selectedAbn" [suggestions]="filteredAbn" (completeMethod)="filterabn($event)"
+            field="name" [minLength]="11"  formControlName="searchabn" field="abn" pKeyFilter="num" placeholder="Enter Abn Number" (keypress)="numberOnly($event)">
+            <ng-template let-abnnumber pTemplate="item">
+                <div class="abnnumber-item">
+                  <div><b>{{abnnumber.abn}}</b>,<div class="text-space"><b>EntityName:</b> {{abnnumber.entityName}},</div> <b>Postcode:</b> {{abnnumber.addressPostcode}}</div>
+                </div>
+            </ng-template>
+            </p-autoComplete>
+            <div class="company-search-btn" >
+                <button pButton pRipple type="submit"  label="Apply" [disabled]= "!selectedAbn" iconPos="right" (click)="onAddSelectAbn()" ></button>
+                <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="closeDialog()"></button>
+            </div>
+        </div>
+        </div>
+        </form>
+    </div>
+</div>

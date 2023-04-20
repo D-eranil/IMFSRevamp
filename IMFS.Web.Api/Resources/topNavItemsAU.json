@@ -1,0 +1,120 @@
+[
+  {
+    "name": "Home",
+    "route": "/home",
+    "iconClass": "monetization_on",
+    "hasChildren": false,
+    "isExternal": false,
+    "children": []
+  },
+  {
+    "name": "Quotes",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": true,
+    "itemState": "collapsed",
+    "isExternal": false,
+    "children": [
+      {
+        "name": "Create Quote",
+        "route": "/quote/quote-details",
+        "isExternal": false,
+        "roleRestriction": ""
+      },
+        {
+            "name": "Search Quote",
+            "route": "/quote/quote-search",
+            "isExternal": false,
+            "roleRestriction": ""
+        }
+    ]
+  },
+  {
+    "name": "Applications",
+    "route": "",
+    "iconClass": "monetization_on",
+    "hasChildren": true,
+    "itemState": "collapsed",
+    "children": [
+        {
+            "name": "Search Applications",
+            "route": "/application/application-search",
+            "isExternal": false,
+            "roleRestriction": ""
+        },
+    ]
+  },
+    {
+        "name": "Settings",
+        "route": "",
+        "iconClass": "monetization_on",
+        "hasChildren": true,
+        "itemState": "collapsed",
+        "includeRoles": "IMStaffAdmin",
+        "children": [
+            {
+                "name": "Funder",
+                "route": "/funder",
+                "isExternal": false,
+                "includeRoles": "IMStaffAdmin",
+                "roleRestriction": ""
+            },
+            {
+                "name": "User Management",
+                "route": "/user-list",
+                "isExternal": false,
+                "includeRoles": "IMStaffAdmin",
+                "roleRestriction": ""
+            },
+            {
+                "name": "Vendor",
+                "route": "/vendor",
+                "isExternal": false,
+                "includeRoles": "IMStaffAdmin",
+                "roleRestriction": ""
+            },
+            {
+                "name": "Finance Type",
+                "route": "/finance-type",
+                "isExternal": false,
+                "includeRoles": "IMStaffAdmin",
+                "roleRestriction": ""
+            },
+            {
+                "name": "Rates",
+                "route": "",
+                "isExternal": false,
+                "roleRestriction": "",
+                "includeRoles": "IMStaffAdmin",
+                "hasChildren": true,
+                "children": [
+                    {
+                        "name": "SKU / Category",
+                        "route": "/quote-rate",
+                        "isExternal": false,
+                        "roleRestriction": "",
+                        "includeRoles": "IMStaffAdmin",
+                        "hasChildren": false,
+                        "children": []
+                    },
+                    {
+                        "name": "Quote Total Value",
+                        "route": "/quote-break-total-rate",
+                        "isExternal": false,
+                        "roleRestriction": "",
+                        "includeRoles": "IMStaffAdmin",
+                        "hasChildren": false,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "Product Type",
+                "route": "/finance-product-type",
+                "isExternal": false,
+                "includeRoles": "IMStaffAdmin",
+                "roleRestriction": ""
+            }
+        ]
+    }
+]

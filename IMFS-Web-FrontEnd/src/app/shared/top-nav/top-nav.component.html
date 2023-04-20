@@ -1,0 +1,107 @@
+<div class="new-navbar-style">
+  <div class="p-grid">
+    <nav role="navigation" class="primary-navigation">
+      <ul>
+        <ng-template ngFor let-navItem [ngForOf]="navItems">
+
+          <li href="#" (click)="openSubitems($event, navItem)" *ngIf="itemAllowed(navItem)"
+              [class.active]="navItem.itemState=='expanded' || (currentItem.route &&  navItem.route == currentItem.route)" class="nav-item">
+            <div>
+              <i [class]="navItem.iconClass" class="menu-icon"></i>
+              <span>{{ navItem.name }}</span>
+              <!--<i class="fas fa-caret-down" *ngIf="navItem.hasChildren && navItem.itemState=='expanded'"></i>
+              <i class="fas fa-caret-down" *ngIf="navItem.hasChildren && navItem.itemState=='collapsed'"></i>-->
+            </div>
+            <ul style="display: none;" *ngIf="navItem.hasChildren" [@slideUpDown]="navItem.itemState">
+
+              <ng-template ngFor let-navSubItem [ngForOf]="navItem.children">
+                <li [class.dropdownTrigger]="navSubItem.hasChildren"  *ngIf="itemAllowed(navItem)">
+                  <a *ngIf="!navSubItem.isExternal && navSubItem.route"
+                     (click)="selectCurrentItem(navItem, navSubItem); $event.stopPropagation();"
+                     [class.selected]="currentSubItem.route == navSubItem.route">
+                    {{ navSubItem.name}}
+                    <i class="pi pi-chevron-right right-arrow" *ngIf="navSubItem.hasChildren"></i>
+                  </a>
+                  <a *ngIf="!navSubItem.isExternal && !navSubItem.route">
+                    {{ navSubItem.name }}
+                    <i class="pi pi-chevron-right right-arrow" *ngIf="navSubItem.hasChildren"></i>
+                  </a>
+
+                  <a *ngIf="navSubItem.isExternal && navSubItem.route.startsWith('http')" href="{{ navSubItem.route }}"
+                     (click)="showRedirecting()">
+                    {{
+                      navSubItem.name
+                    }}
+                  </a>
+
+                  <ul class="dropdown" *ngIf="navSubItem.hasChildren">
+                    <ng-template ngFor let-navSubItem2 [ngForOf]="navSubItem.children">
+                      <li>
+                        <a *ngIf="!navSubItem2.isExternal"
+                           (click)="selectCurrentItem(navSubItem,navSubItem2); $event.stopPropagation();"
+                           [routerLink]="[navSubItem2.route]" [queryParams]="navSubItem2.queryParam">
+                          {{ navSubItem2.name }}
+                        </a>
+                      </li>
+                    </ng-template>
+                  </ul>
+                </li>
+              </ng-template>
+            </ul>
+
+          </li>
+        </ng-template>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!--<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Quotes
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">New Quote</a></li>
+              <li><a class="dropdown-item" href="#">Search Quotes</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Applications
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">New Application</a></li>
+              <li><a class="dropdown-item" href="#">Search Applications</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Approvals</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Settings
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="#">Change Password</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Inbox</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>-->

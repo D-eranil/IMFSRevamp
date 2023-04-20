@@ -1,0 +1,20 @@
+﻿<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:ServiceRequestHeader xmlns="http://www.ingrammicro.com/common/ServiceRequestHeader_v2_2/types" xmlns:h="http://www.ingrammicro.com/common/ServiceRequestHeader_v2_2/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <ApplicationCredential xmlns="">
+        <ID>{0}</ID>
+        <Credential>{1}</Credential>
+      </ApplicationCredential>
+      <TransactionModel xmlns="">
+        <SynchronousRequest>true</SynchronousRequest>
+      </TransactionModel>
+
+      <UserCredential xmlns="">
+        <ID>{2}</ID>
+      </UserCredential>
+    </h:ServiceRequestHeader>
+  </s:Header>
+  <s:Body xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    {3}
+  </s:Body>
+</s:Envelope>

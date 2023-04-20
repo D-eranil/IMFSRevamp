@@ -1,0 +1,434 @@
+
+<p-dialog header="Error in Verifying Code" [(visible)]="displayModal" [modal]="true" [style]="{width: '25vw'}" [baseZIndex]="10000">
+  <p>Error occured while verifying code, please ensure you have the right code or resend code.</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<h5 *ngIf="!haserror" style="font-size: 24px;">{{header}}{{quoteIdGlobal}}</h5>
+<div *ngIf="!haserror" class="p-grid quote-acceptance-background">
+
+  <div class="p-col-10">
+
+      <div class="card left-div-border">
+
+          <div class="p-fluid p-formgrid p-grid">
+
+              <!--
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Quote Name</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.quoteHeader.quoteName}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Quote Status</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.quoteHeader.status}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              -->
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Customer</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.customerDetails?.customerNumber}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>ABN</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.customerDetails?.customerABN}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Customer Address</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.customerDetails?.customerAddressLine1}}
+                      <br>{{quoteDetails.customerDetails?.customerAddressLine2}} <br>
+                      {{quoteDetails.customerDetails?.customerAddressCity}}
+                      {{quoteDetails.customerDetails?.customerAddressState}}
+                      {{quoteDetails.customerDetails?.customerPostCode}} </label>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Name</b></label>
+                  <br>
+                  <label for="">{{ quoteDetails.customerDetails?.customerContact}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Email</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.customerDetails?.customerEmail}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Number</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.customerDetails?.customerPhone}}</label>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>End User</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerName}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>ABN</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerABN}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Address</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerAddressLine1}}
+                      <br>{{quoteDetails.endUserDetails?.endCustomerAddressLine2}} <br>
+                      {{quoteDetails.endUserDetails?.endCustomerCity}}
+                      {{quoteDetails.endUserDetails?.endCustomerState}}
+                      {{quoteDetails.endUserDetails?.endCustomerPostCode}}</label>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Name</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerContact}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Email</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerEmail}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Contact Number</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerPhone}}</label>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Authorised Signatory Name</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.authorisedSignatoryName}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Authorised Signatory Position</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.authorisedSignatoryPosition}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>No of Years Trading</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.endUserDetails?.endCustomerYearsTrading}}</label>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <p-divider type="dashed"></p-divider>
+              </div>
+
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Line Type</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.quoteHeader?.quoteType}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+                  <label for=""><b>Finance Type</b></label>
+                  <br>
+                  <label for="">{{quoteDetails.quoteHeader?.financeTypeName}}</label>
+              </div>
+              <div class="p-field p-col-12 p-md-4">
+              </div>
+
+
+              <!-- Summary Table -->
+
+              <div class="p-field p-col-12 p-md-12">
+                  <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="displayQuoteLines">
+                      <ng-template pTemplate="header">
+                          <tr>
+                              <th *ngIf="getQuoteType()==='BySKU'"
+                                  class="align-center color-ingramPartnerCentralBlue">
+                                  IM SKU</th>
+                              <th *ngIf="getQuoteType()==='BySKU'"
+                                  class="align-center color-ingramPartnerCentralBlue">
+                                  VPN</th>
+                              <th *ngIf="getQuoteType()==='BySKU'"
+                                  class="align-center color-ingramPartnerCentralBlue">
+                                  Description</th>
+                              <th *ngIf="getQuoteType()==='ByCategory'"
+                                  class="align-center color-ingramPartnerCentralBlue">Type </th>
+                              <th *ngIf="getQuoteType()==='ByCategory'"
+                                  class="align-center color-ingramPartnerCentralBlue">Category </th>
+                              <th class="align-center color-ingramPartnerCentralBlue">Qty </th>
+                              <th class="align-center color-ingramPartnerCentralBlue">Sale Price </th>
+                              <th class="align-center color-ingramPartnerCentralBlue">TotalGST </th>
+                              <th class="align-center color-ingramPartnerCentralBlue">Total </th>
+                          </tr>
+
+                      </ng-template>
+                      <ng-template pTemplate="body" let-quoteLine let-editing="editing">
+                          <tr>
+                              <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.imsku}}</td>
+                              <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.vpn}}</td>
+                              <td *ngIf="getQuoteType()==='BySKU'" class="align-center">{{quoteLine.description}}</td>
+                              <td *ngIf="getQuoteType()==='ByCategory'" class="align-center">{{quoteLine.itemName}}
+                              </td>
+                              <td *ngIf="getQuoteType()==='ByCategory'" class="align-center">
+                                  {{quoteLine.categoryName}}</td>
+                              <td class="align-center">{{quoteLine.qty}}</td>
+                              <td class="align-center">{{quoteLine.salePrice | currency}}</td>
+                              <td class="align-center">{{quoteLine.totalGST | currency}}</td>
+                              <td class="align-center">{{quoteLine.lineTotal | currency}}</td>
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="summary">
+                          <div class="p-field p-col-12 p-offset-11">
+                              <label>Total:</label>
+                              <label>{{ quoteDetails.quoteHeader?.quoteTotal | currency }}</label>
+                          </div>
+
+                      </ng-template>
+                  </p-table>
+              </div>
+              <!-- Summary Table Ends-->
+
+              <div class="p-field p-col-12 p-md-12">
+                  <p-splitter [style]="{'height': '130px'}" styleClass="p-mb-5">
+                      <ng-template pTemplate>
+                          <div class="p-col p-d-flex p-ai-center p-jc-center">
+                              <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                  <label style="color:#B2B4B2;" for="">Duration</label>
+                                  <br>
+                                  <label for=""><b>{{quoteDetails.quoteHeader?.quoteDuration}}
+                                          Months</b></label>
+                              </div>
+                          </div>
+                      </ng-template>
+                      <ng-template pTemplate>
+                          <div class="p-col p-d-flex p-ai-center p-jc-center">
+                              <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                  <label style="color:#B2B4B2;" for="">Payment Frequency</label>
+                                  <br>
+                                  <label for=""><b>{{quoteDetails.quoteHeader?.frequency}}</b></label>
+                              </div>
+                          </div>
+                      </ng-template>
+
+                      <ng-template pTemplate>
+                          <div class="p-col p-d-flex p-ai-center p-jc-center">
+                              <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                  <label style="color:#B2B4B2;" for="">Payment Plan</label>
+                                  <br>
+                                  <label for=""><b>{{getFunderPlan()}}</b></label>
+                              </div>
+                          </div>
+                      </ng-template>
+
+                      <ng-template pTemplate>
+                          <div class="p-col p-d-flex p-ai-center p-jc-center">
+                              <div class="p-field p-col-12 p-md-12" style="text-align: center;">
+                                  <label for=""><b>{{quoteDetails.quoteHeader?.financeValue | currency}}</b></label>
+                                  <br>
+                                  <label style="color:#B2B4B2;" for="">per frequency</label>
+                              </div>
+                              <span><b></b></span>&nbsp;
+                              <span style="color:#B2B4B2;"></span>&nbsp;
+                          </div>
+                      </ng-template>
+                  </p-splitter>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+  <div class="p-col-2">
+      <h2 *ngIf="!emailSent">Proceed with Quote</h2>
+
+      <div *ngIf="!emailSent" class="p-col-12 p-offset-3">
+          <button pButton pRipple type="button" label="Proceed with Quote" [disabled]="rejectQuoteDisable" icon="pi pi-check" (click)="proceedQuote()"
+              iconPos="left" class=""></button>
+      </div>
+
+      <div *ngIf="!emailSent" class="p-col-12 p-offset-2">
+          <button pButton pRipple type="button" label="Request Changes" [disabled]="rejectQuoteDisable" (click)="requestChanges()"
+              class="p-button-outlined p-button-secondary"></button>
+          <label for="or"> or </label>
+          <button pButton pRipple type="button" label="Reject" (click)="rejectQuotes()"
+              class="p-button-outlined p-button-secondary reject-button-width"[disabled]="rejectQuoteDisable"></button>
+              <p-dialog header="Reject Quote" [(visible)]="rejectQuoteDialog" [style]="{width: '30vw'}" [baseZIndex]="10000">
+                  <div class="quote-reject-form">
+                      <form [formGroup]="quoteRejectForm">
+                          <div class="p-field p-grid">
+                              <div  class="p-col-3">
+                                  <label>Reason</label>
+                              </div>
+                              <div class="p-col-9">
+                                  <p-dropdown formControlName="RejectReason" [options]="rejectreasons" optionLabel="label" optionValue="value" placeholder="Select"></p-dropdown>
+                              </div>
+                          </div>
+                          <div class="p-field p-grid">
+                              <div  class="p-col-3">
+                                  <label>Comment</label>
+                              </div>
+                              <div class="p-col-9">
+                                  <textarea pInputTextarea formControlName="RejectMessage" name="rejectMessage"></textarea>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                  <ng-template pTemplate="footer">
+                      <button pButton (click)="rejectQuoteDialog=false; resetRejectQuote()" label="Cancel" class="p-button-outlined p-button-secondary"></button>
+                      <p-button (click)="rejectQuote(reason,comment);" [disabled]="!quoteRejectForm.valid" label="Submit"></p-button>
+                  </ng-template>
+              </p-dialog>
+      </div>
+
+      <div class="p-col-12">
+          <div class="quote-expire-border">
+              <label for="quoteExpires">This quote expires in</label>
+              <br />
+              <label for="quoteExpires"><b>{{daysLeft | number: "1.0-0"}} days</b></label>
+          </div>
+      </div>
+      <div class="p-col-12" *ngIf="emailSent && !codeVerified">
+          <label for="verification">A verification code has been <br /> sent to <b class="email"> {{quoteDetails.endUserDetails.endCustomerEmail}} </b> </label>
+      </div>
+
+      <div class="p-col-12" *ngIf="emailSent && !codeVerified">
+          <h5>Enter your code here</h5>
+          <input type="text" class="input-verify-code" pInputText [(ngModel)]="emailCode">
+      </div>
+
+      <div class="p-col-12" *ngIf="emailSent && !codeVerified" >
+          <div class="p-fluid p-formgrid p-grid p-offset-3">
+              <div class="p-field p-col-12 p-md-7">
+                  <button pButton pRipple type="button" label="Accept Quote" (click)="acceptQuote()"></button>
+              </div>
+
+             <!-- <div class="p-field p-col-12 p-md-3">
+                  <button pButton pRipple type="button" label="Cancel" (click)="cancel()"></button>
+              </div>-->
+          </div>
+
+      </div>
+
+      <div class="p-col-12" *ngIf="emailSent && !codeVerified" >
+          <div class="p-fluid p-formgrid p-grid p-offset-3">
+              <div class="p-field p-col-12 p-md-6">
+                  <button pButton pRipple type="button" label="Resend Code"
+                      class="p-button-outlined p-button-secondary" (click)="resendCode()"></button>
+              </div>
+          </div>
+      </div>
+
+      <div class="p-col-12">
+          <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col-12 p-md-12 ">
+                  <p-panel id="progressPanel" header="Progress of Quote" [toggleable]="false">
+                      <div>
+                          <label [class]="(emailSent)? 'stepDone' : 'stepNotDone'" for="step1"><b>Step 1: Proceed with
+                                  Quote</b></label>
+                      </div>
+
+                      <div>
+                          <label [class]="(emailSent)? 'stepDone' : 'stepNotDone'" for="step2"><b>Step 2: Check your
+                                  email</b></label>
+                      </div>
+
+                      <div>
+                          <label [class]="(codeVerified)? 'stepDone' : 'stepNotDone'" for="step3"><b>Step 3: Enter
+                                  verification code</b></label>
+                      </div>
+                      <div>
+                          <label [class]="(codeVerified)? 'stepNext' : 'stepNotDone'" for="step4"><b>Step 4: Submit Application</b></label>
+                      </div>
+                      <div>
+                          <label class="stepNotDone" for="step5"><b>Step 5: Application Approval</b></label>
+                      </div>
+                      <div>
+                          <label class="stepNotDone" for="step6"><b>Step 6: Contract Issued</b></label>
+                      </div>
+                  </p-panel>
+              </div>
+          </div>
+      </div>
+
+      <div class="p-col-12" *ngIf="codeVerified">
+          <div class="p-fluid p-formgrid p-grid">
+              <div class="p-field p-col-12 p-md-12">
+                  <p-panel id="nextStep" header="Next Step" [toggleable]="false">
+                      <div>
+                          <label class="stepDone" for="nextStep1"><b>You will soon receive some important information regarding the application process, along with an application form for your quote. If you would like to discuss your application, please call IMFS on 1300 651 124 or email IMFS directly on financialsolutions@ingrammicro.com.au.
+                          </b></label>
+                      </div>
+
+
+                  </p-panel>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+</div>
+
+<div class="p-grid" *ngIf="haserror" >
+  <h1>This is invalid code, please contact IMFS Support team</h1>
+</div>

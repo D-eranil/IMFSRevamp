@@ -1,0 +1,296 @@
+/* -- COLOUR VARIABLES AND HELPER CLASSES -- */
+::ng-deep {
+  :root {
+    --ingramblue: #0076CE;
+    --secondaryblue: #0E93FF;
+    --mutedblue: #9FD1FF;
+    --white: #ffffff;
+    --black: #000000;
+    --bggrey: #f8f8f8;
+    --lightgrey: #e5e6e8;
+    --mediumgrey: #555555;
+    --darkgrey: #3E4247;
+    --integrityblue2: #4FBCF0;
+    --integrityblue3: #11A2ED;
+    --greyblue1: #A4B0BC;
+    --greyblue2: #b1bcc8;
+    --lightblue: #E1E9EF;
+    --rowblue: #F8FBFF;
+  }
+  /*If device is greater than or equal to 768px, then do*/
+  
+
+  body#page_login {
+    font-size: 16px !important;
+    font-family: 'Helvetica Neue', Helvetica, 'Inter', Arial, sans-serif !important;
+    font-weight: normal !important;
+    line-height: 1.5em !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility !important;
+    height: 100%;
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+
+  .login-m {
+    background-color: #0076CE;
+    min-height: 100vh;
+    display: table;
+    vertical-align: middle;
+    margin: 0 auto;
+    width: 100%;
+
+    .text-ingramblue {
+      color: var(--ingramblue);
+    }
+
+    .text-integrityblue3 {
+      color: var(--integrityblue3);
+    }
+
+    .text-mutedblue {
+      color: var(--mutedblue);
+    }
+
+    .reverse {
+      color: var(--white);
+    }
+
+    .bg-lightgrey {
+      background-color: var(--bggrey);
+    }
+
+    .bg-ingramblue {
+      background-color: var(--ingramblue);
+    }
+
+    .bg-secondaryblue {
+      background-color: var(--secondaryblue);
+    }
+
+    .bg-lightblue {
+      background-color: var(--lightblue);
+    }
+
+    .wrapper {
+      width: auto;
+    }
+
+    h1 {
+      color: var(--mutedblue);
+      font-size: 60px;
+    }
+
+    a.big-button.mb-4.bg-white.primary {
+      margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: var(--black);
+      font-weight: bold;
+      margin: 2em 0em 1em 0em;
+    }
+
+    h3 {
+      color: var(--ingramblue);
+      font-size: 18px;
+      font-weight: bold;
+      margin: 2em 0em 1em 0em;
+    }
+
+    h5, h6 {
+      color: var(--mutedblue);
+      font-size: 1.25em;
+    }
+
+    h5:after {
+      content: '';
+      height: 1px;
+      width: 30px;
+      display: block;
+      position: relative;
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+      margin-left: -15px;
+      left: 13px;
+      background-color: var(--mutedblue);
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--integrityblue3);
+    }
+
+    a.big-button {
+      padding: 30px;
+      display: inline-block;
+      position: relative;
+      border-radius: 10px;
+      width: 100%;
+      border: 5px solid var(--white);
+      color: var(--mediumgrey);
+      cursor: pointer;
+    }
+
+    a.big-button.secondary {
+      border: 5px solid var(--secondaryblue);
+      color: var(--white);
+    }
+
+    a.big-button:hover {
+      border: 5px solid var(--secondaryblue);
+    }
+
+    a.big-button.secondary:hover {
+      border: 5px solid var(--white);
+      color: var(--white);
+    }
+
+    a.big-button.primary i.fas {
+      color: var(--lightblue);
+    }
+
+    a.big-button.primary:hover i.fas {
+      color: var(--secondaryblue);
+    }
+
+    a.big-button.secondary i.fas {
+      color: var(--ingramblue);
+    }
+
+    a.big-button.secondary:hover i.fas {
+      color: var(--white);
+    }
+
+    a.big-button-top {
+      margin-top: 50px;
+      padding: 30px;
+      display: inline-block;
+      position: relative;
+      border-radius: 10px;
+      width: 100%;
+      border: 5px solid var(--white);
+      color: var(--mediumgrey);
+      cursor: pointer;
+    }
+
+    a.big-button-top.secondary {
+      border: 5px solid var(--secondaryblue);
+      color: var(--white);
+    }
+
+    a.big-button-top:hover {
+      border: 5px solid var(--secondaryblue);
+    }
+
+    a.big-button-top.secondary:hover {
+      border: 5px solid var(--white);
+      color: var(--white);
+    }
+
+    a.big-button-top.primary i.fas {
+      color: var(--lightblue);
+    }
+
+    a.big-button-top.primary:hover i.fas {
+      color: var(--secondaryblue);
+    }
+
+    a.big-button-top.secondary i.fas {
+      color: var(--ingramblue);
+    }
+
+    a.big-button-top.secondary:hover i.fas {
+      color: var(--white);
+    }
+
+    .remove-padding {
+      padding: 0;
+    }
+
+    footer p {
+      color: #9FD1FF;
+    }
+  }
+
+
+  .login-m .flex-container {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+@media only screen and (min-width: 768px) {
+  h1, h2, h3, h4, h5, h6, p, i {
+    text-align: left;
+  }
+
+  p.copyright {
+    text-align: right;
+  }
+
+  footer img {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  h5:after {
+    margin-left: 0;
+    left: 0;
+  }
+}
+/*If device is greater than or equal to 976px, then do*/
+@media only screen and (min-width: 976px) {
+  .nav-item {
+    margin-right: 1.5em;
+    font-weight: bold;
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .dropdown-menu[data-bs-popper] {
+    margin-top: 1.5em;
+  }
+
+  .dropdown-item {
+    padding: 0.75em;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--secondaryblue);
+    color: var(--white);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .login-m {
+    display: block;
+  }
+  .login-m h5, .login-m h6 {
+    text-align: center;
+  }
+  .login-m footer p {
+    margin-bottom: 30px;
+  }
+  .login-m h5:after {
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0 auto 20px;
+    bottom: -7px;
+  }
+  .login-m footer img{
+      margin:0 auto;
+  }
+  .login-m p, .login-m h2, .login-m h1{
+    text-align: center;
+  }
+}

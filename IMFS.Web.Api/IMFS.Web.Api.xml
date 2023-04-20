@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IMFS.Web.Api</name>
+    </assembly>
+    <members>
+        <member name="M:IMFS.Web.Api.Controllers.ApplicationController.GetRecentApplications">
+            <summary>
+            Get the applications for this reseller
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.ApplicationController.GetAwaitingInvoices">
+            <summary>
+            get awaiting invoices for the resller account
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IMFS.Web.Api.Controllers.BaseController">
+            <summary>
+            This will be a base class for Other Controllers,
+            All common functions shall be added here and authorization may be added here
+            </summary>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetRecentQuotes">
+            <summary>
+            Get the recent quotes by for the reseller account
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetAddresses(IMFS.Web.Models.Quote.AddressRequest)">
+            <summary>
+            Get the recent quotes by for the reseller account
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetAbnDetails(System.String,System.String)">
+            <summary>
+            date:03-02-2022
+            this api for get abn details by abn and guid.
+            </summary>
+            <param name="abn"></param>
+            <param name="guid"></param>
+            <returns>response abn details json resopnse</returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetAbnInfoListingByName(System.String,System.String)">
+            <summary>
+            date:03-02-2022
+            this api for get abn listing by name.
+            </summary>
+            <param name="name"></param>
+            <param name="guid"></param>
+            <returns>get response apn listing</returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.UploadAttachments(IMFS.Web.Models.Quote.AttachmentRequest)">
+            <summary>
+            save quote attachment's by quote id
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.DeleteAttachments(IMFS.Web.Models.Quote.DeleteAttachmentRequest)">
+            <summary>
+            remove quote attachment's by file id
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetAttachments(System.Int32,System.Int32)">
+            <summary>
+            get all files by quoteId
+            </summary>
+            <param name="quoteId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.DownloadAttachment(System.Int32)">
+            <summary>
+            Download files
+            </summary>
+            <param name="fileId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteController.GetProductsBySkuOrVPN(System.String)">
+            <summary>
+            Get product details by sku or vpn from orp db.
+            </summary>
+            <param name="param">sku or vpn</param>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuotePercentRateController.UploadRate">
+            <summary>
+            This accepts FormData with files from client
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.QuoteTotalRateController.UploadRate">
+            <summary>
+            This accepts FormData with files from client
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IMFS.Web.Api.Controllers.RateController.UploadRate">
+            <summary>
+            This accepts FormData with files from client
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:IMFS.Web.Api.MimeTypes">
+            <summary>
+            Provides utilities for mapping file names and extensions to MIME-types.
+            </summary>
+        </member>
+        <member name="P:IMFS.Web.Api.MimeTypes.FallbackMimeType">
+            <summary>
+            The fallback MIME-type. Defaults to <c>application/octet-stream</c>.
+            </summary>
+        </member>
+        <member name="M:IMFS.Web.Api.MimeTypes.GetMimeTypeExtensions(System.String)">
+            <summary>
+            Attempts to fetch all available file extensions for a MIME-type.
+            </summary>
+            <param name="mimeType">The name of the MIME-type</param>
+            <returns>All available extensions for the given MIME-type</returns>
+        </member>
+        <member name="M:IMFS.Web.Api.MimeTypes.TryGetMimeType(System.String,System.String@)">
+            <summary>
+            Tries to get the MIME-type for the given file name.
+            </summary>
+            <param name="fileName">The name of the file.</param>
+            <param name="mimeType">The MIME-type for the given file name.</param>
+            <returns><c>true</c> if a MIME-type was found, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:IMFS.Web.Api.MimeTypes.GetMimeType(System.String)">
+            <summary>
+            Gets the MIME-type for the given file name,
+            or <see cref="P:IMFS.Web.Api.MimeTypes.FallbackMimeType"/> if a mapping doesn't exist.
+            </summary>
+            <param name="fileName">The name of the file.</param>
+            <returns>The MIME-type for the given file name.</returns>
+        </member>
+    </members>
+</doc>

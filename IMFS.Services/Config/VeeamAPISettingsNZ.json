@@ -1,0 +1,5 @@
+{
+    "CountryCode": "NZ",
+    "JWTToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTA2Mzc4MjAsImp0aSI6IlBSQzVlY2YzNGZjNmMzNjkyLjI0NzYyMzM3IiwiaXNzIjoicHJvcGFydG5lci52ZWVhbS5jb21cL2FwaVwvIiwibmJmIjoxNTkwNjM3ODIwLCJzdWIiOjMyMDUxNywibWdyIjpmYWxzZSwiY29udGFpbmVyIjoie1widXNlcklkXCI6MzIwNTE3LFwiY29tcGFueUlkXCI6NzI3N30iLCJleHAiOjE2MjIxNTk5NDB9.zoyZim_wOazH-J3SmjTMqTUv_1IfsBSmR27kShRQ5Aw",
+    "GetContactsUrl": "https://propartner.veeam.com/api/external/ingram/renewals/export/sku"
+}

@@ -1,0 +1,27 @@
+.footer-div {
+    font-size: 14px;    
+}
+
+.ingram-logo {
+    margin-left: -25px;
+    max-width: 150px;
+}
+.footer-row .align-right {
+  text-align: right;
+  display: block;
+}
+.footer-div span {
+  color: var(--mutedblue) !important;
+}
+/*------------------------Mobile--------------------------*/
+@media (max-width: 767px) {
+      
+  .ingram-logo {
+    margin-left: -10px;
+  }
+  .copyright {
+    padding-right: 10px;
+  }
+      
+}
+

@@ -1,0 +1,17 @@
+<div class="loader-screen semi-transparent" *ngIf="showLoading">
+    <div class="loading">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="ui-g loading-message">
+      <div class="p-grid">
+        <div class="p-col-12">{{ loadingMessage }}...</div>
+        <div class="p-col-12" *ngIf="showCancelButton">
+          <button type="button" label="Cancel" pButton (click)="cancelClick()"></button>
+        </div>
+      </div>
+    </div>
+  </div>

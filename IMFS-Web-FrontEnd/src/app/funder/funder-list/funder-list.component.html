@@ -1,0 +1,69 @@
+<h1>Funder</h1>
+
+<div class="p-fluid p-grid">
+    <div class="p-field p-col-12">
+        <button pButton type="button" label="Add New Funder" style="width: 200px;"
+            (click)="createNewFunder()"></button>
+    </div>
+
+    <div class="p-field p-col-12">
+
+        <p-table #dt1 [value]="funders" [style]="{'width':'70%'}" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="funderCode">Funder Code <p-sortIcon field="funderCode"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="funderName">Funder Name <p-sortIcon field="funderName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="apI_URL">API URL <p-sortIcon field="apI_URL"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="contactEmailAdd">Contact Email <p-sortIcon field="contactEmailAdd">
+                        </p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="isActive">Active <p-sortIcon field="isActive"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="funderCode" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="funderName" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="apI_URL" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="contactEmailAdd" matchMode="contains"
+                            [showMatchModes]="false" [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="isActive" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-funder let-editing="editing">
+                <tr>
+                    <td>{{funder.funderCode}}</td>
+                    <td [pTooltip]="funder.funderName" class="one-line-span">{{funder.funderName}}</td>
+                    <td>{{funder.apI_URL}}</td>
+                    <td>{{funder.contactEmailAdd}}</td>
+                    <td class="align-center">{{funder.isActive | yesNo}}</td>
+                    <td class="align-center">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editFunder(funder)"
+                            class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <app-funder-details-modal #detailsModal (refreshEmit)="loadFunders()"></app-funder-details-modal>

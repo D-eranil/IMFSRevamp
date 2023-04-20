@@ -1,0 +1,32 @@
+<p-dialog [(visible)]="displayDialog" [responsive]="true" [header]="header" [style]="{width: '35vw'}" [baseZIndex]="10000">
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Code</label></div>        
+        <div class="p-col-8">
+            <input id="code" type="text" pInputText [(ngModel)]="currentItem.code">
+        </div>
+    </div>
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Description</label></div>
+        <div class="p-col-8">
+            <input id="description" type="text" pInputText [(ngModel)]="currentItem.description">
+        </div>
+    </div>    
+
+    <div class="p-field p-grid">
+        <div class="p-col-4"><label>Active</label></div>
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Active" [(ngModel)]="currentItem.isActive" inputId="opt1" [value]="true" ></p-radioButton>
+        </div> 
+        <div class="p-col-4">
+            <p-radioButton name="IsActive" label="Inactive" [(ngModel)]="currentItem.isActive" inputId="opt2" [value]="false"></p-radioButton>
+        </div>
+    </div> 
+
+    <p-footer>
+        <button pButton type="button" label="Save" (click)="saveFinanceProductType()"></button>
+        <button pButton type="button" label="Cancel" (click)="displayDialog=false" class="p-button-outlined"></button>
+    </p-footer>
+
+</p-dialog>

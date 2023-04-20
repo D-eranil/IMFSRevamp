@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release;au-test;Production;au-staging</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Request.Body.Peeker" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IMFS.BusinessLogic\IMFS.BusinessLogic.csproj" />
+    <ProjectReference Include="..\IMFS.Core\IMFS.Core.csproj" />
+    <ProjectReference Include="..\IMFS.Web.Models\IMFS.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

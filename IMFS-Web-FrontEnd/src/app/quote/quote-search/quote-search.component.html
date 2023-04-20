@@ -1,0 +1,170 @@
+<h5 style="font-size: 24px;">My Quotes
+</h5>
+
+
+<form [formGroup]="quoteSearchForm">
+    <div class="card linearGrad">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-6">
+                <label for="quoteNumber">Quote Number</label>
+                <p-autoComplete formControlName="QuoteNumber" [suggestions]="filteredQuotes"
+                    (completeMethod)="filterQuoteByQuoteNumber('lookup')" [(ngModel)]="quoteNumber" (onSelect)="onQuoteNumberSelect($event)"
+                    (onClear)="onQuoteNumberSelect(null)" field="displayLabel" [minLength]="3"
+                    placeholder="Please enter Quote Number"></p-autoComplete>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="financeType">Finance Type</label>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col-3">
+                        <p-checkbox name="FinanceType" value="1" label="Leasing" [(ngModel)]="selectedFinanceType"  formControlName="FinanceType">
+                        </p-checkbox>
+                    </div>
+                    <div class="p-col-3">
+                      <p-checkbox name="FinanceType" value="2" label="Rental" [(ngModel)]="selectedFinanceType"  formControlName="FinanceType">
+                      </p-checkbox>
+                    </div>
+
+                    <div class="p-col-3">
+                      <p-checkbox name="FinanceType" value="3" label="Instalments"  [(ngModel)]="selectedFinanceType"  formControlName="FinanceType">
+                      </p-checkbox>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-field p-col-6">
+                <label for="status">Status</label>
+                <p-dropdown formControlName="QuoteStatus" name="quoteStatus" [options]="quoteStatusOptions" [showClear]="true" optionLabel="description" optionValue="id"
+                    placeholder="Select">
+                </p-dropdown>
+            </div>
+
+            <div class="p-field p-col-6">
+                <label for="endUser">End User</label>
+                <input formControlName="EndUser" id="endUser" type="text" pInputText>
+            </div>
+
+            <div class="p-field p-col-4">
+                <label for="quoteName">Created Date</label>
+                <p-calendar formControlName="CreatedDate" name="createdDate" dateFormat="dd/mm/yy" [showIcon]="true"
+                    [minDate]="createdDate">
+                </p-calendar>
+            </div>
+
+            <div class="p-field p-col-4">
+                <label for="quoteName">Expiry Date</label>
+                <p-calendar formControlName="ExpiryDate" name="expiryDate" dateFormat="dd/mm/yy" [showIcon]="true">
+                </p-calendar>
+            </div>
+            <div class="p-field p-col-4" *ngIf="IMStaffAdmin">
+                <label for="Reseller Account Number">Reseller Account Number</label>
+                <p-autoComplete formControlName="ResellerAccountNumber" [suggestions]="filteredResellerId"
+                (completeMethod)="filterQuote('lookup')" (onSelect)="onQuoteNumberSelect($event)"
+                (onClear)="onQuoteNumberSelect(null)" field="displayLabel" [minLength]="3"
+                placeholder="Please enter Reseller Application Number">
+                <ng-template let-customer pTemplate="customer">
+                  <div class="company-item">
+                      <div>{{customer.customerNumber}}-{{customer.customerName}}
+                      </div>
+                  </div>
+              </ng-template>
+              </p-autoComplete>
+                <!-- <input formControlName="ResellerAccountNumber" id="resellerAccountNumber" type="number" pInputText> -->
+            </div>
+            <div class="p-field p-col-4" *ngIf="!IMStaffAdmin"></div>
+            <div class="p-col-4"></div>
+            <div class="p-col-4"></div>
+            <div class="p-col-2">
+                <button pButton pRipple type="button" class="p-button-outlined resetButton" label="Reset All Filters"
+                    icon="pi pi-refresh" iconPos="right" (click)="setDefaults()"></button>
+            </div>
+
+            <div class="p-col-2">
+                <button pButton pRipple type="button" label="Apply" icon="pi pi-search" iconPos="right"
+                    (click)="filterQuote('search')"></button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="p-fluid p-col-12 p-md-12">
+
+        <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="filteredQuotes" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="quoteNumber">Quote Number<p-sortIcon field="quoteNumber"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="quoteName">Quote Name <p-sortIcon field="quoteName"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="endUser">End User <p-sortIcon field="endUser"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="quoteTotal">Quote Total<p-sortIcon field="quoteTotal"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="expiryDate">Expiry Date<p-sortIcon field="expiryDate"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="createdDate">Created Date<p-sortIcon field="createdDate"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                </tr>
+
+            </ng-template>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="quoteNumber" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="quoteName" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="endUser" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="number" field="quoteTotal" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="date" field="expiryDate" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="status" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="date" field="createdDate" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th></th>
+
+            </tr>
+            <ng-template pTemplate="body" let-quote let-rowIndex="rowIndex">
+                <tr>
+                    <td class="align-center">{{quote.quoteNumber}}</td>
+                    <td [pTooltip]="quote.quoteName" class="one-line-span">{{quote.quoteName}}</td>
+                    <td class="align-left">{{quote.endCustomer}}</td>
+                    <td class="align-right">{{quote.quoteTotal | currency}}</td>
+                    <td class="align-center">{{quote.expiryDate | date: 'dd/MM/yyyy'}}</td>
+                    <td class="align-center">{{quote.quoteStatusDescr}}</td>
+                    <td class="align-center">{{quote.createdDate | date: 'dd/MM/yyyy'}}</td>
+
+                    <td class="align-right">
+                        <button pButton pRipple type="button" icon="pi pi-pencil" pTooltip="Edit Quote" (click)="openQuote(quote.quoteNumber)"
+                            class="p-button-rounded p-button-text"></button>
+
+                            <button pButton pRipple type="button" icon="pi pi-send" pTooltip="Email" (click)="emailQuote(quote.quoteNumber)"
+                            class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+
+</form>

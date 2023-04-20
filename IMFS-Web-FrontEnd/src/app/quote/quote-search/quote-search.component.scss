@@ -1,0 +1,20 @@
+.linearGrad {
+    // height: 200px;
+    background-color: white; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to top, #486576, #1A394B);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.resetButton {
+    background-color: #000 !important;
+    border-color: #000;
+    color: #FFF;
+    padding: 0.6em 0.7em 0.6em !important;
+}
+.resetButton:hover, .resetButton:focus {
+    color: #FFF !important;
+    background-color: #333 !important;
+    border-color: #333 !important;
+}

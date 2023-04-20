@@ -1,0 +1,165 @@
+<h5 style="font-size: 24px;">My Applications
+</h5>
+
+
+<form [formGroup]="applicationSearchForm">
+    <div class="card linearGrad">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-6">
+                <label for="applicationNumber">Application Number</label>
+                <p-autoComplete formControlName="ApplicationNumber" [suggestions]="filteredApplications"
+                (completeMethod)=" filterApplicationByApplicationNum('lookup')" [(ngModel)]="applicationNumber"
+                (onSelect)="onApplicationNumberSelect($event)" (onClear)="onApplicationNumberSelect(null)"
+                field="applicationNumber" [minLength]="3" placeholder="Please enter Application Number">
+            </p-autoComplete>
+            </div>
+            <div class="p-field p-col-6">
+                <div class="p-field search-checkbox">
+                    <div class="p-field">
+                        <label for="financeType">Finance Type</label>
+                    </div>
+                    <div class="p-grid">
+                        <div class="p-col-3">
+                            <p-checkbox name="FinanceTypeLeasing"  value="1" label="Leasing" formControlName="FinanceTypeLeasing">
+                            </p-checkbox>
+                        </div>
+                        <div class="p-col-3">
+                            <p-checkbox name="FinanceTypeRental"   value="2" label="Rental" formControlName="FinanceTypeRental">
+                            </p-checkbox>
+                        </div>
+                        <div class="p-col-3">
+                            <p-checkbox name="FinanceTypeInstalments"  value="4" label="Instalments" formControlName="FinanceTypeInstalments">
+                            </p-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-field p-col-6">
+                <label for="status">Status</label>
+                <p-dropdown formControlName="Status" name="applicationStatus" [options]="applicationStatusOptions" [showClear]="true" optionLabel="description" optionValue="id"
+                    placeholder="Select">
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-6">
+                <label for="endUser">End Customer Name</label>
+                <input formControlName="EndCustomerName" id="endUser" type="text" pInputText>
+            </div>
+
+            <div class="p-field p-col-4">
+                <label for="fromDate">From Date</label>
+                <p-calendar formControlName="fromDate"  [maxDate]="toDate" name="fromDate" dateFormat="dd/mm/yy" [showIcon]="true"
+                (onSelect)="setMinDate()" >
+                </p-calendar>
+            </div>
+            <div class="p-field p-col-4 search-application-date-changes">
+                <label for="toDate">To Date</label>
+                <p-calendar formControlName="toDate"  (onSelect)="setMaxDate()" [minDate]="fromDate" name="toDate" dateFormat="dd/mm/yy" [showIcon]="true"
+                        >
+                </p-calendar>
+            </div>
+            <div class="p-field p-col-4" *ngIf="IMStaffAdmin">
+                <label for="Reseller Account Number">Reseller Account Number</label>
+                <p-autoComplete formControlName="ResellerAccountNumber" [suggestions]="filteredResellerId" #input
+                (completeMethod)="filterApplication('lookup')" (onSelect)="onApplicationNumberSelect($event)"
+                [(ngModel)]="resellerId" field="displayLabel" [minLength]="3"
+                placeholder="Please enter Reseller Application Number">
+                <ng-template let-customer pTemplate="customer">
+                  <div class="company-item">
+                      <div>{{customer.customerNumber}}-{{customer.customerName}}
+                      </div>
+                  </div>
+              </ng-template>
+            </p-autoComplete>
+                <!-- <input formControlName="ResellerAccountNumber" id="resellerAccountNumber" [(ngModel)]="resellerId" type="number" pInputText> -->
+            </div>
+            <div class="p-field p-col-4" *ngIf="!IMStaffAdmin"></div>
+            <div class="p-col-4"></div>
+            <div class="p-col-2"></div>
+            <div class="p-col-2">
+              <button *ngIf="showCheckApplicationButton" pButton pRipple type="button" class="" label="Check Applications" icon="pi"
+              (click)="checkApplications()"></button>
+            </div>
+            <div class="p-col-2">
+                <button pButton pRipple type="button" class="p-button-outlined resetButton" label="Reset All Filters"
+                    icon="pi pi-refresh"  (click)="setDefaults();searchApplications()"></button>
+            </div>
+            <div class="p-col-2">
+                <button pButton pRipple type="button" label="Search" icon="pi pi-search"
+                    (click)="filterApplication('search')"></button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="p-fluid p-col-12 p-md-12">
+
+        <p-table #dt1 [style]="{'width':'100%'}" [rows]="10" [value]="filteredApplications" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="applicationNumber">Application #<p-sortIcon field="applicationNumber"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="endCustomerName">End Customer <p-sortIcon field="endCustomerName"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="quoteTotal">Fin Amt<p-sortIcon field="quoteTotal"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="financeType">Finance Type <p-sortIcon field="financeType"></p-sortIcon></th>
+                    <th class="align-center color-ingramPartnerCentralBlue" pSortableColumn="createdDate">Created Date<p-sortIcon field="createdDate"></p-sortIcon>
+                    </th>
+                    <th class="align-center color-ingramPartnerCentralBlue">Action </th>
+                </tr>
+
+            </ng-template>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="applicationNumber" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="status" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="endCustomerName" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="number" field="quoteTotal" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="financeType" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="date" field="createdDate" matchMode="contains" [showMatchModes]="false"
+                        [showMenu]="false"></p-columnFilter>
+                </th>
+                <th></th>
+
+            </tr>
+            <ng-template pTemplate="body" let-application let-rowIndex="rowIndex">
+                <tr>
+                    <td class="align-center">{{application.applicationNumber}}</td>
+                    <td class="align-center">{{application.statusDescr}}</td>
+                    <td class="align-center">{{application.endCustomerName}}</td>
+                    <td class="align-right">{{application.quoteTotal | currency}}</td>
+                    <td class="align-center">{{application.financeTypeName}}</td>
+                    <td class="align-center">{{application.createdDate | date: 'dd/MM/yyyy'}}</td>
+                    <td class="align-right">
+                        <button pButton pRipple type="button"  icon="pi pi-pencil" pTooltip="Edit Application" (click)="openApplication(application.id, application.applicationNumber)"
+                            class="p-button-rounded p-button-text"></button>
+
+                            <button pButton pRipple type="button"  icon="pi pi-send" pTooltip="Email Customer" (click)="emailApplication(application.id, application.applicationNumber)"
+                            class="p-button-rounded p-button-text"></button>
+
+                            <button pButton pRipple type="button"  icon="pi pi-trash" pTooltip="Cancel Application" (click)="cancelApplication(application.id)"
+                            class="p-button-rounded p-button-text" *ngIf="!(application.status === 12 || application.status === 21)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,92 @@
+<h1>Vendor</h1>
+
+<div class="p-fluid p-grid">
+    <div class="p-field p-col-12">
+        <button pButton type="button" label="Add New Vendor" style="width: 200px" (click)="createNewVendor()"></button>
+    </div>
+    <div class="p-field p-col-12">
+
+        <p-table #dt1 [value]="vendors" [style]="{'width':'100%'}" [rows]="10" [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[10,25,50]" [paginator]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 12rem" pSortableColumn="vendorCode">Vendor Code <p-sortIcon field="vendorCode">
+                        </p-sortIcon>
+                    </th>
+                    <th pSortableColumn="vendorName">Vendor Name <p-sortIcon field="vendorName"></p-sortIcon>
+                    </th>
+                    <th style="width: 12rem" pSortableColumn="supplierNumber">Supplier No.<p-sortIcon
+                            field="supplierNumber"></p-sortIcon>
+                    </th>
+                    <th style="width: 12rem" pSortableColumn="manufacturerNumber">Manufacturer No.<p-sortIcon
+                            field="manufacturerNumber"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="currency">Currency<p-sortIcon field="currency">
+                        </p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="sapId">SAP Id<p-sortIcon field="sapId"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="companyCode">Country<p-sortIcon field="companyCode">
+                        </p-sortIcon>
+                    </th>
+                    <th style="width: 8rem" pSortableColumn="active">Active <p-sortIcon field="active"></p-sortIcon>
+                    </th>
+                    <th style="width: 8rem">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <p-columnFilter type="text" field="vendorCode" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="vendorName" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="supplierNumber" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="manufacturerNumber" matchMode="contains"
+                            [showMatchModes]="false" [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="currency" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="sapId" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="companyCode" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="active" matchMode="contains" [showMatchModes]="false"
+                            [showMenu]="false"></p-columnFilter>
+                    </th>
+                    <th></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-vendor let-editing="editing">
+                <tr>
+                    <td>{{vendor.vendorCode}}</td>
+                    <td [pTooltip]="vendor.vendorName" class="one-line-span">{{vendor.vendorName}}</td>
+                    <td>{{vendor.supplierNumber}}</td>
+                    <td>{{vendor.manufacturerNumber}}</td>
+                    <td class="align-center">{{vendor.currency}}</td>
+                    <td>{{vendor.sapId}}</td>
+                    <td class="align-center">{{vendor.companyCode}}</td>
+                    <td class="align-center">{{vendor.active | yesNo}}</td>
+                    <td>
+                        <button pButton pRipple type="button" icon="pi pi-pencil" (click)="editVendor(vendor)"
+                            class="p-button-rounded p-button-text"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+    <app-vendor-details-modal #detailsModal (refreshEmit)="loadVendors()"></app-vendor-details-modal>

@@ -1,0 +1,18 @@
+
+GO
+/****** Object:  Table [dbo].[Config]    Script Date: 1/28/2022 12:19:52 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Config](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](100) NULL,
+	[value] [varchar](200) NULL,
+	[expireDateTime] [datetime] NULL,
+ CONSTRAINT [PK_Config] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO

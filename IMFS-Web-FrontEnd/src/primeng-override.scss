@@ -1,0 +1,94 @@
+/* For tab view control */
+.p-tabview-nav {
+    // background: #ebf3fa !important ;
+    height: 60px !important;
+    border-radius: 10px !important;
+}
+
+.p-tabview-nav li {
+    flex: 1 !important;
+    text-align: center !important;
+    border: 0px 0px 0px 35%;
+}
+
+.p-tabview-title {
+    padding: 0;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    display: flex;
+    justify-content: center;
+}
+
+.p-tabview-nav-link {
+    background: #ebf3fa !important ;
+    border: none !important;
+    color: #b2b4b2 !important;
+    height: 60px;
+}
+
+li.p-highlight .p-tabview-nav-link {
+    color: black !important;
+    background: white !important;
+}
+
+.p-tabview-nav li .p-tabview-nav-link {
+    font-weight: 900;
+}
+
+.p-breadcrumb {
+    background: #e1e9ef !important;
+    border: none !important;
+}
+
+.p-breadcrumb ul li .p-menuitem-link .p-menuitem-text {
+    color: #0072ce !important;
+}
+
+.p-breadcrumb ul li:last-child .p-menuitem-text {
+    color: black !important;
+}
+
+.p-radiobutton .p-radiobutton-box{
+    background: white !important;
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+    background: #0072ce !important;
+    border-color: white;
+}
+
+.p-radiobutton .p-radiobutton-box .p-radiobutton-icon{
+    background-color: #0072ce !important;
+
+}
+
+body .p-button.p-button-success, body .p-buttonset.p-button-success > .p-button, body .p-splitbutton.p-button-success > .p-button {
+    color: #0076ce;
+    background: #FFF;
+    border: 1px solid #0076ce;
+    border-radius: 4px;
+}
+body .p-button.p-button-success:enabled:hover, body .p-buttonset.p-button-success > .p-button:enabled:hover, body .p-splitbutton.p-button-success > .p-button:enabled:hover {
+    color: #FFF;
+    border-color: #11a2ed;
+    background: #11a2ed;
+}
+body .p-button.p-button-success.p-button-outlined, body .p-buttonset.p-button-success > .p-button.p-button-outlined, body .p-splitbutton.p-button-success > .p-button.p-button-outlined {
+    color: #0076ce;
+    border: 1px solid #0076ce;
+}
+body .p-button.p-button-success.p-button-outlined:enabled:hover, body .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover, body .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
+    background: #11a2ed;
+    color: #FFF;
+    border: 1px solid #11a2ed;
+}
+.p-download .p-splitbutton-defaultbutton {
+    white-space: nowrap;
+}
+body .p-button.p-button-secondary, body .p-buttonset.p-button-secondary > .p-button, body .p-splitbutton.p-button-secondary > .p-button {
+    color: #ffffff;
+    background: #11a2ed;
+    border: 1px solid #11a2ed;
+}
+

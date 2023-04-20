@@ -1,0 +1,106 @@
+.upload-box {
+    background-color: rgb(33 150 243 / 15%);
+    border-radius: 10px;
+    padding: 40px 30px;
+    position: relative;
+    overflow: hidden;
+}
+.files-list {
+    max-height: 280px;
+    overflow-y: scroll;
+    font-size: 14px;
+}
+.files-list p {
+    position: relative;
+    line-height: 1.2;
+    padding: 8px 10px;
+    margin: 0;
+}
+.files-list p:hover, .files-list p:focus {
+    background-color: #f3f6f9;
+}
+.files-list h2 {
+    margin-bottom: 10px;
+}
+.files-list p.selected .pi-check{
+    position: absolute;
+    top: 16px;
+    right: 34px;
+    color: #2196f3;
+    font-size: 15px;
+    font-weight: 600;
+}
+.files-list p.selected .pi-trash {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: #2196f3;
+    font-size: 15px;
+    font-weight: 600;
+}
+.icon {
+    margin-top: 10px;
+    font-size: 3.5rem;
+    color: #2196f3;
+}
+.small {
+    font-size: 11px;
+    color: #888;
+}
+.files-list::-webkit-scrollbar {
+    width: 6px;
+}
+.files-list::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+.files-list span{
+    word-wrap: break-word;
+        width: 83%;
+        display: inline-block;
+}
+.upload-file-input input{
+    padding: 0;
+    width: 100%;
+    font-size: 0;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    left:-40px;
+    height: 100%;
+    padding: 20px;
+    z-index: 99;
+}
+.upload-file-input{
+    position: relative;
+    overflow: hidden;
+}
+.upload-box input[type="file"] {
+    font-size: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: -16px;
+    right: 0;
+    top: 0;
+}
+input[type="file"]:focus{
+    outline:none;
+    -webkit-outline:none;
+}
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+    margin-top: 30px;
+}
+.p-fileupload .p-fileupload-buttonbar {
+    font-size: larger;
+    height: 50px;
+}
+.p-fileupload {
+    font-family: Neue Helvetica, Helvetica, sans-serif;
+}
+.p-fileupload-content {
+    height: calc(100% - 50px);
+}
